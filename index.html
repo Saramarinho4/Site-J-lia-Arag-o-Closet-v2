@@ -162,6 +162,9 @@
       .help a { color: var(--terracota); display: inline-flex; align-items: center; min-height: 44px; }
 
       /* vip */
+      .vipsec { position: relative; }
+      .vipsec::before { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22260%22%20height%3D%22220%22%20viewBox%3D%220%200%20260%20220%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%233B2219%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20transform%3D%22translate%2818%2020%29%20rotate%28-8%2050%2030%29%22%3E%3Cpath%20d%3D%22M50%2022v-5c0-3%205-4%205-9%200-4-3-6-6-6s-6%202-6%206%22%20/%3E%3Cpath%20d%3D%22M50%2022L7%2045c-3%201.5-2%204%201%204h84c3%200%204-2.5%201-4z%22%20/%3E%3C/g%3E%3Cg%20transform%3D%22translate%28150%2070%29%20rotate%2810%2050%2030%29%20scale%28.8%29%22%3E%3Cpath%20d%3D%22M50%2022v-5c0-3%205-4%205-9%200-4-3-6-6-6s-6%202-6%206%22%20/%3E%3Cpath%20d%3D%22M50%2022L7%2045c-3%201.5-2%204%201%204h84c3%200%204-2.5%201-4z%22%20/%3E%3C/g%3E%3Cg%20transform%3D%22translate%2840%20140%29%20rotate%284%2050%2030%29%20scale%28.9%29%22%3E%3Cpath%20d%3D%22M50%2022v-5c0-3%205-4%205-9%200-4-3-6-6-6s-6%202-6%206%22%20/%3E%3Cpath%20d%3D%22M50%2022L7%2045c-3%201.5-2%204%201%204h84c3%200%204-2.5%201-4z%22%20/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); background-size: 260px 220px; opacity: 0.07; pointer-events: none; }
+      .vipsec .wrap { position: relative; }
       .vip { position: relative; max-width: 640px; margin: 0 auto; background: var(--off); padding: clamp(56px, 8vw, 80px) clamp(28px, 6vw, 72px) clamp(44px, 6vw, 64px); text-align: center; transform: rotate(-1.4deg); box-shadow: 0 1px 0 rgba(59, 34, 25, 0.05), 0 22px 50px -24px rgba(59, 34, 25, 0.35); border: 1px solid rgba(201, 139, 90, 0.3); }
       .vip::after { content: ""; position: absolute; inset: 10px; border: var(--line); pointer-events: none; }
       .vip > * { transform: rotate(1.4deg); }
@@ -389,7 +392,7 @@
       .polaroid--mini { position: absolute; z-index: 3; width: 40%; right: -18px; bottom: -34px; transform: rotate(5deg); padding: 8px 8px 34px; }
       .polaroid--mini img { aspect-ratio: 3 / 4; }
       .polaroid--mini figcaption { font-size: 22px; bottom: 6px; left: 0; text-align: center; }
-      .polaroid--main { margin-right: 22%; }
+      .polaroid--main { margin: 0 4%; }
       .tape { position: absolute; top: -12px; left: 50%; width: 96px; height: 26px; margin-left: -48px; background: rgba(242, 203, 193, 0.75); transform: rotate(-4deg); box-shadow: 0 1px 2px rgba(59, 34, 25, 0.08); }
       .polaroid--mini .tape { width: 64px; margin-left: -32px; background: rgba(246, 231, 168, 0.8); transform: rotate(6deg); }
       .loja__copy .label { color: var(--laranja-texto); }
@@ -600,7 +603,7 @@
         </div>
       </section>
 
-      <section class="sec">
+      <section class="sec vipsec">
         <div class="wrap">
           <div class="vip fade">
             <svg class="vip__clip" viewBox="0 0 64 74" aria-hidden="true">
@@ -612,7 +615,7 @@
             <h2>No grupo VIP tem peças com grandes descontos!</h2>
             <span class="script">Aproveite.</span>
             <p class="vip__perks"><span>Peças com desconto</span><span>Novidades em primeira mão</span></p>
-            <a class="btn" href="https://wa.me/5562994877575" target="_blank" rel="noopener">Entrar no grupo VIP</a>
+            <a class="btn" href="https://chat.whatsapp.com/KIwviachro8G3ZXUnh71hd" target="_blank" rel="noopener">Entrar no grupo VIP</a>
           </div>
         </div>
       </section>
@@ -621,7 +624,6 @@
         <div class="wrap loja__in">
           <div class="loja__photos fade">
             <figure class="polaroid polaroid--main"><span class="tape" aria-hidden="true"></span><img src="img/jac-fachada-loja.jpg" alt="Fachada da loja Júlia Aragão Closet, com vitrine e manequins" loading="lazy" /><figcaption>nossa lojinha ✦</figcaption></figure>
-            <figure class="polaroid polaroid--mini"><span class="tape" aria-hidden="true"></span><img src="img/jac-body-cores.jpg" alt="Bodies nas cores terracota, bege e preto, nos cabides" loading="lazy" /><figcaption>escolhidas a dedo</figcaption></figure>
           </div>
           <div class="loja__copy fade">
             <p class="label">Nossa loja tá de portas abertas ✦</p>
@@ -633,7 +635,7 @@
               <li><i aria-hidden="true">✦</i>Atendimento pertinho pelo WhatsApp</li>
               <li><i aria-hidden="true">✦</i>Envio pra todo o Brasil pelos Correios</li>
             </ul>
-            <p class="quote">“Os planos de Deus se cumprem no tempo certo ✨”</p>
+            <p class="quote">“Os planos de Deus se cumprem no tempo certo”</p>
             <a class="btn" href="https://wa.me/5562994877575" target="_blank" rel="noopener">Falar com a loja</a>
           </div>
         </div>
@@ -755,7 +757,7 @@
         <h2>Pedido confirmado <span style="color:var(--laranja)">✦</span></h2>
         <p>Pedido <b id="okNum" style="font-weight:500;color:var(--choco)"></b></p>
         <div class="side" id="okSum"></div>
-        <p>Você vai receber a confirmação no e-mail e no WhatsApp.</p>
+        <p id="okMsg">O comprovante do Mercado Pago chega no seu e-mail, e a loja fala com você no WhatsApp pra combinar o envio.</p>
         <p style="margin-top:28px"><button class="btn" id="okBack">Voltar à loja</button></p>
       </div>
     </div>
@@ -797,16 +799,22 @@
             desc: "Vestido no crepe duna vermelho, tamanho GG.", photos: [["jac-vestido-crepe-duna-vermelho.jpg", "Modelo com o vestido vermelho no crepe duna"]] },
           marrantVermelho: { name: "Conjunto no Marrant vermelho", cat: "Conjuntos", price: 194.99, veste: "40", ultima: true, col: "celebrar", occ: [OCC_NATAL, OCC_CONF], stock: { P: 1 },
             desc: "Conjunto no Marrant vermelho, tamanho P. Última peça.", photos: [["jac-conjunto-marrant-vermelho.jpg", "Modelo com o conjunto vermelho no Marrant, blusa e calça"]] },
+          vestLongoOff: { name: "Vestido longo off-white na alfaiataria", cat: "Vestidos", price: 149.99, ultima: true, col: "celebrar", occ: [OCC_REV, OCC_CONF], stock: { M: 1 },
+            desc: "Vestido longo na alfaiataria, com drapeado na cintura. Tamanho M, peça única.", photos: [["jac-vestido-longo-off-white-frente.jpg", "Modelo de frente com o vestido longo off-white na alfaiataria"], ["jac-vestido-longo-off-white-lado.jpg", "Vestido longo off-white com drapeado, visto de frente"], ["jac-vestido-longo-off-white-costas.jpg", "Vestido longo off-white visto de costas"]] },
+          vestFluidoMarrom: { name: "Vestido longo fluido na alfaiataria marrom", cat: "Vestidos", price: 149.99, veste: "42", ultima: true, col: "celebrar", occ: [OCC_NATAL, OCC_CONF], stock: { G: 1 },
+            desc: "Vestido longo e fluido na alfaiataria, com botões e faixa na cintura. Tamanho G, veste até o 42 (forma pequena). Peça única.", photos: [["jac-vestido-fluido-marrom.jpg", "Modelo com o vestido longo marrom fluido na alfaiataria"], ["jac-vestido-fluido-marrom-2.jpg", "Vestido longo marrom fluido, de corpo inteiro"]] },
           bodyPaete: { name: "Body com paetê", cat: "Bodies", price: 39.99, veste: "42", col: "celebrar", occ: [OCC_REV, OCC_CONF], stock: { "Único": 1 /* a confirmar */ },
             desc: "Body com paetê, tamanho único.", photos: [["jac-body-paete.jpg", "Modelo com o body de paetê preto"]] },
           conjPaete: { name: "Conjunto no paetê", cat: "Conjuntos", price: 79.99, veste: "42", col: "celebrar", occ: [OCC_REV, OCC_CONF], stock: { "Único": 1 /* a confirmar */ },
             desc: "Conjunto no paetê, tamanho único.", photos: [["jac-conjunto-paete.jpg", "Modelo com o conjunto de paetê"]] },
 
           /* --- Vitrine: Vestidos --- */
-          vestViscosePreto: { name: "Vestido na viscose preto", cat: "Vestidos", price: 119.99, veste: "44", stock: { G: 1 /* a confirmar */ }, photos: [["jac-vestido-viscose-preto.jpg", "Modelo com o vestido preto na viscose"]] },
+          vestViscosePreto: { name: "Vestido no viscolinho preto", cat: "Vestidos", price: 109.99, veste: "44", stock: { G: 1 /* a confirmar */ }, photos: [["jac-vestido-viscose-preto.jpg", "Modelo com o vestido preto na viscose"]] },
           chemiseViscose: { name: "Chemise na viscose preta", cat: "Vestidos", price: 149.99, stock: { GG: 1 /* a confirmar */ }, photos: [["jac-chemise-viscose-preta.jpg", "Modelo com a chemise longa preta na viscose"]] },
           vestViscolycra: { name: "Vestido na viscolycra verde", cat: "Vestidos", price: 129.99, stock: { M: 1 /* a confirmar */ }, photos: [["jac-vestido-viscolycra-verde-frente.jpg", "Vestido longo verde na viscolycra, de frente"], ["jac-vestido-viscolycra-verde-lado.jpg", "Vestido longo verde na viscolycra, de lado"]] },
           vestTrespassado: { name: "Vestido no viscolinho trespassado azul", cat: "Vestidos", price: 159.99, veste: "46", stock: { GG: 1 /* a confirmar */ }, photos: [["jac-vestido-trespassado-azul.jpg", "Modelo com o vestido longo azul trespassado"]] },
+          tubinhoViscolinho: { name: "Tubinho no viscolinho preto", cat: "Vestidos", price: 119.99, ultima: true, stock: { G: 1 }, photos: [["jac-tubinho-viscolinho-preto.jpg", "Modelo com o tubinho preto no viscolinho"]] },
+          vestViscolycraPreto: { name: "Vestido longo na viscolycra preto", cat: "Vestidos", price: 129.99, stock: { G: 1 /* a confirmar */ }, desc: "Vestido longo na viscolycra, preto com listras off-white na barra. Tamanho G.", photos: [["jac-vestido-viscolycra-preto.jpg", "Modelo com o vestido longo preto na viscolycra, com listras na barra"]] },
           tubinhoAmarelo: { name: "Tubinho na alfaiataria amarelo", cat: "Vestidos", price: 79.99, stock: { G: 1 /* a confirmar */ }, photos: [["jac-tubinho-amarelo.jpg", "Modelo com o tubinho amarelo na alfaiataria"]] },
           chemiseSedinha: { name: "Chemise na sedinha estampada", cat: "Vestidos", price: 139.99, veste: "46", stock: { GG: 1 /* a confirmar */ }, photos: [["jac-chemise-sedinha-estampada.jpg", "Modelo com a chemise estampada na sedinha"]] },
           vestCanelado: { name: "Vestido no canelado 3D", cat: "Vestidos", price: 59.99, veste: "40", stock: { "Único": 1 /* a confirmar */ }, photos: [["jac-vestido-canelado-3d.jpg", "Modelo com o vestido curto no canelado 3D"]] },
@@ -832,6 +840,8 @@
           camisaListradaP: { name: "Camisa na viscose listrada", cat: "Blusas e camisas", price: 94.99, veste: "40", stock: { P: 1 /* a confirmar */ }, photos: [["jac-camisa-listrada-marrom.jpg", "Modelo com a camisa listrada na viscose, tamanho P"]] },
           blusaSedinhaM: { name: "Blusa sedinha com malha", cat: "Blusas e camisas", price: 49.99, stock: { M: 1 /* a confirmar */ }, photos: [["jac-blusa-sedinha-malha-m.jpg", "Modelo com a blusa estampada de sedinha com malha, tamanho M"]] },
           blusaSedinhaGG: { name: "Blusa sedinha com malha", cat: "Blusas e camisas", price: 49.99, veste: "46", stock: { GG: 1 /* a confirmar */ }, photos: [["jac-blusa-sedinha-malha-gg.jpg", "Modelo com a blusa estampada de sedinha com malha, tamanho GG"]] },
+          bataPoa: { name: "Bata tomara que caia de poá", cat: "Blusas e camisas", price: 74.99, veste: "40", ultima: true, stock: { "Único": 1 }, photos: [["jac-bata-poa-frente.jpg", "Modelo com a bata tomara que caia preta de poá e calça jeans"], ["jac-bata-poa-lado.jpg", "Bata de poá vista de lado"]] },
+          blusaAssimetrica: { name: "Blusa assimétrica na sedinha", cat: "Blusas e camisas", price: 74.99, veste: "42", stock: { "Único": 1 /* a confirmar */ }, photos: [["jac-blusa-assimetrica-calca-linho.jpg", "Modelo com a blusa assimétrica azul na sedinha e a calça off-white no linho"]] },
           tshirt: { name: "T-shirt", cat: "Blusas e camisas", price: 49.99, stock: { P: 1 /* a confirmar */ }, photos: [["jac-tshirt-short-marrom.jpg", "Modelo com a t-shirt e o short marrom"]] },
           blusaMarrom: { name: "Blusa marrom na poliamida", cat: "Blusas e camisas", price: 59.99, veste: "40", ultima: true, stock: { "Único": 1 }, photos: [["jac-blusa-marrom-calca-bege.jpg", "Modelo com a blusa marrom na poliamida e a calça bege"], ["jac-blusa-marrom-calca-bege-costas.jpg", "Blusa marrom e calça bege, de costas"]] },
           blusaPink: { name: "Blusa alça no Marrant pink", cat: "Blusas e camisas", price: 49.99, stock: { M: 1 /* a confirmar */ }, photos: [["jac-blusa-alca-pink.jpg", "Modelo com a blusa de alça pink no Marrant"]] },
@@ -839,11 +849,16 @@
           /* --- Vitrine: Calças e shorts --- */
           shortOffWhite: { name: "Short off-white", cat: "Calças e shorts", price: 59.99, stock: { P: 1 /* a confirmar */ }, photos: [["jac-body-short-off-white.jpg", "Modelo com o short off-white e body verde"], ["jac-body-short-off-white-lado.jpg", "Short off-white, de lado"]] },
           shortMarrom: { name: "Short marrom", cat: "Calças e shorts", price: 59.99, stock: { P: 1 /* a confirmar */ }, photos: [["jac-tshirt-short-marrom.jpg", "Modelo com o short marrom e t-shirt"]] },
+          calcaWide: { name: "Calça jeans wide leg", cat: "Calças e shorts", price: 168.0, stock: { "40": 1, "42": 1 /* a confirmar */ }, desc: "Calça jeans wide leg, nos tamanhos 40 e 42.", photos: [["jac-calca-wide-leg.jpg", "Modelo com a calça jeans wide leg e a camisa listrada"]] },
+          calcaLinho: { name: "Calça no linho", cat: "Calças e shorts", price: 179.99, byColor: true, colors: [{ n: "Off-white" }, { n: "Preta" }], stock: { "Off-white": { M: 1 }, Preta: { M: 1 } /* a confirmar */ }, desc: "Calça no linho, tamanho M, nas cores off-white e preta.", photos: [["jac-blusa-assimetrica-calca-linho.jpg", "Modelo com a calça off-white no linho e a blusa assimétrica azul"]] },
           calcaBege: { name: "Calça bege", cat: "Calças e shorts", price: 99.99, stock: { P: 1 /* a confirmar */ }, desc: "Calça bege vendida separadamente.", photos: [["jac-blusa-marrom-calca-bege-costas.jpg", "Modelo com a calça bege, de costas"], ["jac-blusa-marrom-calca-bege.jpg", "Calça bege com a blusa marrom"]] },
+
+          /* --- Vitrine: Básicos --- */
+          regataBoreal: { name: "Regata no canelado boreal", cat: "Básicos", price: 64.99, byColor: true, colors: [{ n: "Bege" }, { n: "Cinza" }], stock: { Bege: { G: 1 }, Cinza: { G: 1 } /* a confirmar */ }, desc: "Regata no canelado boreal, tamanho G, nas cores bege e cinza.", photos: [["jac-regata-canelado-boreal.jpg", "Modelo com a regata clara no canelado boreal"]] },
 
           /* --- Vitrine: Macacões --- */
           macacaoCargo: { name: "Macacão cargo no Marrant", cat: "Macacões", price: 199.99, ultima: true, stock: { G: 1 }, photos: [["jac-macacao-cargo.jpg", "Modelo com o macacão cargo cinza no Marrant"]] },
-          macaquinhoPreto: { name: "Macaquinho na sedinha preto", cat: "Macacões", price: 69.99, veste: "40", stock: { "Único": 1 /* a confirmar */ }, photos: [["jac-macaquinho-sedinha-preto-frente.jpg", "Macaquinho preto na sedinha no manequim, de frente"], ["jac-macaquinho-sedinha-preto-costas.jpg", "Macaquinho preto na sedinha, costas com amarração"]] }
+          macaquinhoPreto: { name: "Macaquinho na sedinha preto", cat: "Macacões", price: 69.99, veste: "40", stock: { "Único": 1 /* a confirmar */ }, photos: [["jac-macaquinho-sedinha-preto-modelo-2.jpg", "Modelo com o macaquinho preto na sedinha"], ["jac-macaquinho-sedinha-preto-frente.jpg", "Macaquinho preto na sedinha no manequim, de frente"], ["jac-macaquinho-sedinha-preto-costas.jpg", "Macaquinho preto na sedinha, costas com amarração"]] }
         };
         Object.keys(NOVAS).forEach(function (id) {
           var p = NOVAS[id];
@@ -851,6 +866,12 @@
           if (!p.fit && p.veste) p.fit = (p.stock["Único"] != null ? "Veste até o " : "Veste ") + p.veste;
           P[id] = p;
         });
+        /* ============================================================
+           PAGAMENTO: cole aqui o link do servidor (Cloudflare Worker),
+           ex.: "https://julia-pagamento.SEU-USUARIO.workers.dev".
+           Vazio = modo demonstração (não cobra nada).
+           ============================================================ */
+        var API = "";
         var SHIPS = [
           { k: "pac", name: "PAC", info: "6 a 9 dias úteis", price: 22.9 },
           { k: "sedex", name: "SEDEX", info: "2 a 4 dias úteis", price: 38.5 }
@@ -877,7 +898,7 @@
 
 
         /* cards das peças novas (gerados a partir dos dados) */
-        function sizeLine(p) { var k = Object.keys(p.stock)[0], u = k === "Único"; return (u ? "Tamanho único" : "Tam. " + k) + (p.veste ? " · veste " + (u ? "até o " : "") + p.veste : ""); }
+        function sizeLine(p) { var st = p.byColor ? p.stock[Object.keys(p.stock)[0]] : p.stock, ks = Object.keys(st), k = ks.length > 1 && !p.byColor ? ks.join("/") : ks[0], u = k === "Único"; return (u ? "Tamanho único" : "Tam. " + k) + (p.veste ? " · veste " + (u ? "até o " : "") + p.veste : ""); }
         function priceHtml(p) { return (p.old ? '<s class="old">' + fmt(p.old) + "</s>" : "") + fmt(p.price); }
         function makeCard(id) {
           var p = P[id], b = document.createElement("button"), badges = [];
@@ -1103,7 +1124,33 @@
           if (step < 3) { step++; renderCk(); ck.scrollTop = 0; return; }
           finish();
         };
+        function val(id) { return $(id).value.trim(); }
         function finish() {
+          if (!/^https:\/\//.test(API)) return finishDemo();
+          var so = shipObj(), mode = payMode(), pay = document.querySelector('input[name="pay"]:checked').value, btn = $("ckNext");
+          var okHtml = "<h3>Resumo</h3>" + summaryHtml(cart) + '<div class="sums">' + sumsHtml(mode) + '</div><p class="item__var">' + so.name + (so.info ? " · " + so.info : "") + " · " + pay + " via Mercado Pago</p>";
+          var body = {
+            itens: cart.map(function (l) { return { id: l.id, tam: l.size, cor: P[l.id].byColor ? l.color : null, qtd: l.qty }; }),
+            frete: ship, pagamento: mode === "pix" ? "pix" : "cartao",
+            cliente: { nome: val("fNome"), email: val("fEmail"), whatsapp: val("fWpp") },
+            endereco: { cep: val("fCep"), rua: val("fRua"), numero: val("fNum"), bairro: val("fBairro"), cidade: val("fCidade"), uf: val("fUf").toUpperCase() }
+          };
+          btn.disabled = true; btn.textContent = "Abrindo o Mercado Pago…"; $("ckErr").textContent = "";
+          fetch(API.replace(/\/$/, "") + "/checkout", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
+            .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d }; }); })
+            .then(function (x) {
+              if (!x.ok || !x.d.link) {
+                btn.disabled = false; btn.textContent = "Pagar com Mercado Pago";
+                $("ckErr").textContent = (x.d && x.d.erro) || "Não deu pra abrir o pagamento. Tente de novo.";
+                if (x.d && x.d.esgotado) loadStock();
+                return;
+              }
+              try { localStorage.setItem("jac_pedido", JSON.stringify({ ref: x.d.ref, html: okHtml })); } catch (e) {}
+              location.href = x.d.link;
+            })
+            .catch(function () { btn.disabled = false; btn.textContent = "Pagar com Mercado Pago"; $("ckErr").textContent = "Sem conexão com o pagamento. Confira a internet e tente de novo."; });
+        }
+        function finishDemo() {
           var lines = cart.slice(), so = shipObj(), pay = document.querySelector('input[name="pay"]:checked').value;
           lines.forEach(function (l) { var m = stockMap(l.id, l.color); m[l.size] = Math.max(0, m[l.size] - l.qty); });
           $("okNum").textContent = "#JAC-" + (10000 + Math.floor(Math.random() * 89999));
@@ -1122,7 +1169,33 @@
           fades.forEach(function (f) { io.observe(f); });
         } else fades.forEach(function (f) { f.classList.add("in"); });
 
-        updateCards(); renderBag();
+        /* estoque real vindo do servidor */
+        function loadStock() {
+          if (!/^https:\/\//.test(API)) return;
+          fetch(API.replace(/\/$/, "") + "/estoque").then(function (r) { return r.json(); }).then(function (st) {
+            Object.keys(st).forEach(function (id) { if (P[id]) P[id].stock = st[id]; });
+            updateCards(); renderBag();
+          }).catch(function () {});
+        }
+        /* volta do Mercado Pago */
+        function backFromMP() {
+          var q = new URLSearchParams(location.search), ref = q.get("pedido");
+          if (!ref) return;
+          var st = q.get("collection_status") || q.get("status") || "", falhou = q.get("falhou") || st === "rejected" || st === "null";
+          var saved = null; try { saved = JSON.parse(localStorage.getItem("jac_pedido") || "null"); } catch (e) {}
+          history.replaceState(null, "", location.pathname + location.hash);
+          var ok = $("ckOk");
+          ok.querySelector(".label").textContent = falhou ? "Pagamento não concluído" : "Obrigada pela compra";
+          ok.querySelector("h2").innerHTML = falhou ? "Ops, o pagamento não foi aprovado" : (st === "approved" ? "Pedido confirmado" : "Pedido recebido") + ' <span style="color:var(--laranja)">✦</span>';
+          $("okNum").textContent = "#" + ref;
+          $("okMsg").textContent = falhou ? "Nenhum valor foi cobrado. Você pode montar a sacola de novo e tentar outra forma de pagamento." : st === "approved" ? "O comprovante do Mercado Pago chega no seu e-mail, e a loja fala com você no WhatsApp pra combinar o envio." : "Assim que o pagamento for confirmado, a loja fala com você no WhatsApp pra combinar o envio.";
+          $("okSum").innerHTML = saved && saved.ref === ref && !falhou ? saved.html : "";
+          fillThumbs($("okSum"));
+          if (!falhou) try { localStorage.removeItem("jac_pedido"); } catch (e) {}
+          $("ckFlow").hidden = true; ok.hidden = false; ck.classList.add("on"); lock(); ck.scrollTop = 0;
+        }
+
+        updateCards(); renderBag(); loadStock(); backFromMP();
       })();
     </script>
   </body>
