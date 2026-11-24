@@ -438,6 +438,77 @@
       @media (max-width: 759px) { .modal__box { display: block; } .modal__ph { aspect-ratio: 4 / 5; } }
       .polaroid--mini figcaption { font-size: 20px; white-space: nowrap; }
       @media (max-width: 520px) { .polaroid--mini figcaption { font-size: 17px; } .polaroid figcaption { font-size: 25px; } }
+
+      /* ===== sacola e checkout (v3, 24/11) ===== */
+      .drawer { width: min(460px, 100%); border-radius: 26px 0 0 26px; box-shadow: -30px 0 80px -40px rgba(31, 16, 11, 0.6); overflow: hidden; background: #fbf7f1; }
+      .drawer__hd { padding: 22px 18px 16px 26px; border-bottom: 0; background: linear-gradient(180deg, #f3e7d8, #fbf7f1); }
+      .drawer__hd h3 { font-size: 34px; display: flex; align-items: baseline; gap: 10px; }
+      .drawer__hd h3 small { font-family: var(--script); font-size: 26px; color: var(--laranja-texto); font-weight: 400; }
+      .drawer__hd .x, .ck__hd .x { border: var(--line); border-radius: 50%; width: 40px; height: 40px; background: rgba(255, 253, 249, 0.9); }
+      .drawer__body { padding: 4px 18px 20px; }
+      .drawer .item { background: #fffdf9; border: var(--line); border-radius: 18px; padding: 12px; margin-top: 12px; grid-template-columns: 74px 1fr; position: relative; }
+      .drawer .item__ph { border-radius: 12px; }
+      .drawer .item .qty button { width: 38px; height: 38px; }
+      .drawer .rm { min-height: 32px; }
+      .frete { margin-top: 18px; border: 1.5px dashed rgba(201, 139, 90, 0.7); border-radius: 18px; padding: 16px; background: #fffaf3; position: relative; }
+      .frete::before { content: ""; position: absolute; top: -11px; right: 26px; width: 70px; height: 22px; background: rgba(246, 231, 168, 0.85); transform: rotate(4deg); box-shadow: 0 1px 2px rgba(59, 34, 25, 0.08); }
+      .frete .label { color: var(--choco); }
+      .cepbox .field { border-radius: 999px; background: #fff; padding: 0 18px; }
+      .cepbox .btn { border-radius: 999px; }
+      .ship { border-radius: 14px; background: #fff; }
+      .drawer__ft { border-top: 0; background: #f3e7d8; border-radius: 22px 22px 0 0; padding: 18px 22px 22px; }
+      .drawer__ft .btn, .ck__nav .btn { border-radius: 999px; }
+      .toast { position: fixed; z-index: 90; left: 50%; bottom: 22px; transform: translate(-50%, 140%); width: min(420px, calc(100% - 28px)); background: var(--choco); color: #fbf7f1; border-radius: 20px; padding: 14px 14px 14px 20px; display: flex; align-items: center; gap: 12px; box-shadow: 0 24px 60px -20px rgba(31, 16, 11, 0.7); transition: transform 0.5s var(--ease); font-size: 13px; line-height: 1.4; }
+      .toast.on { transform: translate(-50%, 0); }
+      .toast b { font-family: var(--script); font-size: 26px; font-weight: 400; display: block; line-height: 1; color: #f6c9a4; }
+      .toast span { flex: 1; }
+      .toast button { background: #fbf7f1; color: var(--choco); border-radius: 999px; padding: 10px 16px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; white-space: nowrap; }
+      .toast .tx { background: transparent; color: #fbf7f1; padding: 6px; font-size: 18px; letter-spacing: 0; }
+
+      .ck { inset: 0 0 0 auto; width: min(580px, 100%); background: #fbf7f1; border-radius: 26px 0 0 26px; box-shadow: -30px 0 80px -40px rgba(31, 16, 11, 0.6); transform: translateX(100%); transition: transform 0.5s var(--ease), opacity 0.3s; opacity: 1; overscroll-behavior: contain; }
+      .ck.on { transform: none; }
+      .ck__hd { background: linear-gradient(180deg, #f3e7d8, rgba(251, 247, 241, 0.96)); border-bottom: 0; padding: 16px 18px 12px 24px; backdrop-filter: blur(6px); }
+      .ck__hd .mark__logo { height: 40px; width: auto; }
+      .ck__ttl { font-family: var(--script); font-size: 30px; color: var(--laranja-texto); margin-right: auto; margin-left: 14px; line-height: 1; }
+      .ck__in, .ck .ck__in { display: flex; flex-direction: column; gap: 18px; max-width: none; padding: 10px 22px 40px; }
+      @media (min-width: 900px) { .ck__in { grid-template-columns: none; } }
+      .ck .side { order: -1; position: static; border-radius: 18px; padding: 0; background: #fffdf9; border: 1.5px dashed rgba(201, 139, 90, 0.7); overflow: hidden; }
+      .side__tg { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 14px 18px; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; font-weight: 600; color: var(--choco); text-align: left; }
+      .side__tg em { font-style: normal; font-family: var(--serif); font-size: 22px; letter-spacing: 0; text-transform: none; color: var(--laranja-texto); font-weight: 500; }
+      .side__tg::after { content: "+"; font-size: 20px; font-weight: 300; transition: transform 0.3s; }
+      .side.open .side__tg::after { transform: rotate(45deg); }
+      .ck .side #ckItems, .ck .side #ckSums { padding: 0 18px; }
+      .ck .side:not(.open) #ckItems { display: none; }
+      .ck .side #ckSums { padding-bottom: 6px; border-top: 1px dashed rgba(201, 139, 90, 0.5); }
+      .ck .side .sums { margin: 6px 0 10px; }
+      .prog { margin: 4px 0 22px; gap: 6px; justify-content: flex-start; }
+      .prog::before, .prog__bar { display: none; }
+      .prog li, .prog li:first-child, .prog li:last-child { flex-direction: row; align-items: center; gap: 6px; padding: 7px 12px 7px 7px; border-radius: 999px; background: #efe3d3; color: var(--choco-2); }
+      .prog li i { width: 24px; height: 24px; font-size: 14px; background: #fffdf9; }
+      .prog li.on { background: var(--choco); color: #fbf7f1; }
+      .prog li.on i { background: var(--laranja); border-color: var(--laranja); color: #fff; }
+      .prog li .label { font-size: 10px; letter-spacing: 0.12em; }
+      .ck h2 { font-size: clamp(30px, 4vw, 40px); margin-bottom: 16px; }
+      .ck h2::after { content: " ✦"; color: var(--laranja-vivo); font-size: 0.6em; vertical-align: middle; }
+      .ck .form label { font-size: 11px; }
+      .ck .field { border-radius: 14px; background: #fff; }
+      .ck .pays { grid-template-columns: 1fr; gap: 10px; }
+      .ck .pay { border-radius: 18px; padding: 18px 20px; background: #fff; }
+      .ck .pay strong { font-size: 26px; }
+      .ck .note { border-radius: 14px; }
+      .ck__nav { position: sticky; bottom: 0; margin: 26px -22px 0; padding: 14px 22px 18px; background: linear-gradient(180deg, rgba(251, 247, 241, 0), #fbf7f1 30%); }
+      .ck .ok { padding: 30px 22px 60px; }
+      .ck .ok .side { border-style: solid; padding: 20px; }
+      @media (max-width: 640px) {
+        .drawer, .ck { top: auto; height: 92vh; height: 92dvh; width: 100%; border-radius: 26px 26px 0 0; }
+        .drawer { transform: translateY(100%); }
+        .ck { transform: translateY(100%); }
+        .drawer.on, .ck.on { transform: none; }
+        .drawer__hd::before, .ck__hd::before { content: ""; position: absolute; top: 7px; left: 50%; width: 44px; height: 4px; margin-left: -22px; border-radius: 4px; background: rgba(59, 34, 25, 0.2); }
+        .drawer__hd, .ck__hd { position: relative; }
+        .ck__hd { position: sticky; }
+        .ck__ttl { font-size: 26px; }
+      }
     </style>
   </head>
   <body>
@@ -669,6 +740,7 @@
     <a class="wa" href="https://wa.me/5562994877575" target="_blank" rel="noopener" aria-label="Falar no WhatsApp"><svg aria-hidden="true"><use href="#wa-ico" /></svg></a>
 
     <div class="scrim" id="scrim"></div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mName">
       <div class="modal__box">
@@ -700,7 +772,7 @@
     </div>
 
     <aside class="drawer" id="drawer" aria-label="Sacola" aria-hidden="true">
-      <div class="drawer__hd"><h3>Sacola</h3><button class="x" data-close aria-label="Fechar sacola">×</button></div>
+      <div class="drawer__hd"><h3>Sua sacola <small>com carinho</small></h3><button class="x" data-close aria-label="Fechar sacola">×</button></div>
       <div class="drawer__body" id="bagBody"></div>
       <div class="drawer__ft" id="bagFt">
         <div class="sums" id="bagSums"></div>
@@ -711,6 +783,7 @@
     <div class="ck" id="ck" role="dialog" aria-modal="true" aria-label="Finalizar compra">
       <div class="ck__hd">
         <span class="mark"><img class="mark__logo" src="img/logo-jac.png" alt="Júlia Aragão Closet" width="904" height="520" /></span>
+        <span class="ck__ttl">finalizar compra</span>
         <button class="x" id="ckClose" aria-label="Fechar">×</button>
       </div>
       <div id="ckFlow" class="ck__in">
@@ -755,7 +828,7 @@
             <button class="btn" id="ckNext">Continuar</button>
           </div>
         </div>
-        <aside class="side"><h3>Resumo do pedido</h3><div id="ckItems"></div><div class="sums" id="ckSums"></div></aside>
+        <aside class="side" id="ckSide"><button class="side__tg" id="ckTg" aria-expanded="false" aria-controls="ckItems"><span>Resumo do pedido</span><em id="ckTgN"></em></button><div id="ckItems"></div><div class="sums" id="ckSums"></div></aside>
       </div>
       <div id="ckOk" class="ok" hidden>
         <p class="label">Obrigada pela compra</p>
@@ -934,7 +1007,7 @@
         function lock() { document.body.classList.toggle("lock", modal.classList.contains("on") || drawer.classList.contains("on") || ck.classList.contains("on")); }
         function closeAll() { var mv = $("mPh").querySelector("video"); if (mv) mv.pause(); modal.classList.remove("on"); drawer.classList.remove("on"); drawer.setAttribute("aria-hidden", "true"); scrim.classList.remove("on"); lock(); if (lastFocus) lastFocus.focus(); }
         function openDrawer() { modal.classList.remove("on"); renderBag(); drawer.classList.add("on"); drawer.setAttribute("aria-hidden", "false"); scrim.classList.add("on"); lock(); drawer.querySelector("[data-close]").focus(); }
-        scrim.onclick = closeAll;
+        scrim.onclick = function () { if (ck.classList.contains("on")) closeCk(); else closeAll(); };
         document.querySelectorAll("[data-close]").forEach(function (b) { b.onclick = closeAll; });
         document.addEventListener("keydown", function (e) { if (e.key === "Escape") { if (ck.classList.contains("on")) closeCk(); else closeAll(); } });
         $("openBag").onclick = function () { lastFocus = this; openDrawer(); };
@@ -1044,7 +1117,36 @@
         document.querySelectorAll(".card").forEach(function (c) { c.onclick = function () { lastFocus = c; openProduct(c.dataset.id); }; });
         document.querySelectorAll("[data-open]").forEach(function (b) { b.onclick = function () { lastFocus = b; openProduct(b.dataset.open); }; });
 
-        function updateCount() { $("bagCount").textContent = count(); }
+        var BAG_KEY = "jac_sacola", BAG_DAYS = 7;
+        function saveBag() { try { if (cart.length) localStorage.setItem(BAG_KEY, JSON.stringify({ t: Date.now(), cart: cart, cep: cep, ship: ship })); else localStorage.removeItem(BAG_KEY); } catch (e) {} }
+        function cleanBag() {
+          var mudou = false;
+          cart = cart.filter(function (l) {
+            var p = P[l.id]; if (!p) { mudou = true; return false; }
+            var m = p.byColor ? p.stock[l.color] : p.stock; if (!m || m[l.size] == null) { mudou = true; return false; }
+            var av = m[l.size] - inCart(l.id, l.size, l.color, l); if (av <= 0) { mudou = true; return false; }
+            if (l.qty > av) { l.qty = av; mudou = true; } return true;
+          });
+          return mudou;
+        }
+        function restoreBag() {
+          var d = null; try { d = JSON.parse(localStorage.getItem(BAG_KEY) || "null"); } catch (e) {}
+          if (!d || !d.cart || !d.cart.length) return;
+          if (Date.now() - (d.t || 0) > BAG_DAYS * 864e5) { try { localStorage.removeItem(BAG_KEY); } catch (e) {} return; }
+          cart = d.cart.map(function (l) { return { id: l.id, size: l.size, color: l.color, qty: Math.max(1, l.qty | 0) }; });
+          cep = d.cep || ""; ship = d.ship || null;
+          var mudou = cleanBag();
+          $("bagCount").textContent = count(); saveBag();
+          if (!cart.length) return;
+          var n = count(), t = $("toast");
+          t.innerHTML = "<span><b>Sua sacola te esperou ✦</b>" + (n > 1 ? "Suas " + n + " peças continuam" : "Sua peça continua") + " guardadinha" + (n > 1 ? "s" : "") + " aqui." + (mudou ? " Uma delas esgotou e saiu da sacola." : "") + '</span><button type="button" id="toastGo">Ver sacola</button><button type="button" class="tx" id="toastX" aria-label="Fechar aviso">×</button>';
+          var hide = function () { t.classList.remove("on"); };
+          setTimeout(function () { t.classList.add("on"); }, 900);
+          var tm = setTimeout(hide, 9000);
+          $("toastGo").onclick = function () { clearTimeout(tm); hide(); lastFocus = $("openBag"); openDrawer(); };
+          $("toastX").onclick = function () { clearTimeout(tm); hide(); };
+        }
+        function updateCount() { $("bagCount").textContent = count(); saveBag(); }
         function updateCards() {
           document.querySelectorAll(".card").forEach(function (c) {
             c.classList.toggle("is-out", soldOut(c.dataset.id));
@@ -1096,25 +1198,26 @@
           ci.oninput = function () { var d = digits(ci.value).slice(0, 8); ci.value = d.length > 5 ? d.slice(0, 5) + "-" + d.slice(5) : d; };
           var calc = function () {
             if (digits(ci.value).length !== 8) { $("cepErr").textContent = "Digite um CEP com 8 números."; ci.classList.add("err"); return; }
-            cep = ci.value; renderBag();
+            cep = ci.value; saveBag(); renderBag();
           };
           $("cepBtn").onclick = calc;
           ci.onkeydown = function (e) { if (e.key === "Enter") calc(); };
-          fr.querySelectorAll('input[name="shipBag"]').forEach(function (r) { r.onchange = function () { ship = r.value; $("bagSums").innerHTML = sumsHtml(); $("bagErr") && ($("bagErr").textContent = ""); }; });
+          fr.querySelectorAll('input[name="shipBag"]').forEach(function (r) { r.onchange = function () { ship = r.value; saveBag(); $("bagSums").innerHTML = sumsHtml(); $("bagErr") && ($("bagErr").textContent = ""); }; });
           $("bagSums").innerHTML = sumsHtml() + '<p class="err-msg" id="bagErr"></p>';
         }
         $("goCheckout").onclick = function () {
           if (!cart.length) return;
           if (!ship) { $("bagErr").textContent = "Calcule o frete pelo CEP e escolha uma opção."; var c = $("cepIn"); if (c) c.focus(); return; }
-          drawer.classList.remove("on"); drawer.setAttribute("aria-hidden", "true"); scrim.classList.remove("on");
+          drawer.classList.remove("on"); drawer.setAttribute("aria-hidden", "true"); scrim.classList.add("on");
           if (cep && !$("fCep").value) $("fCep").value = cep;
           step = 1; $("ckFlow").hidden = false; $("ckOk").hidden = true;
           ck.classList.add("on"); ck.scrollTop = 0; lock(); renderCk(); $("fNome").focus();
         };
 
         /* checkout */
-        function closeCk() { ck.classList.remove("on"); lock(); if ($("ckOk").hidden === false) { $("ckOk").hidden = true; $("ckFlow").hidden = false; } }
+        function closeCk() { ck.classList.remove("on"); scrim.classList.remove("on"); lock(); if ($("ckOk").hidden === false) { $("ckOk").hidden = true; $("ckFlow").hidden = false; } }
         $("ckClose").onclick = closeCk;
+        $("ckTg").onclick = function () { var o = $("ckSide").classList.toggle("open"); this.setAttribute("aria-expanded", o); };
         function summaryHtml(lines) {
           return lines.map(function (l) { return '<div class="item"><div class="item__ph" data-thumb="' + l.id + '"></div><div><h4>' + P[l.id].name.replace("&", "&amp;") + '</h4><p class="item__var">' + variant(l) + " · " + l.qty + (l.qty > 1 ? " peças" : " peça") + '</p><span class="price" style="font-size:16px">' + fmt(P[l.id].price * l.qty) + "</span>" + pixLine(l.id, l.qty) + "</div></div>"; }).join("");
         }
@@ -1130,6 +1233,7 @@
           $("ckShips").innerHTML = shipsHtml("shipCk") + (ship === "loja" ? '<p class="note" style="margin-top:6px">Retire sua sacola na loja. A gente avisa pelo WhatsApp quando estiver pronta.</p>' : "");
           $("ckShips").querySelectorAll("input").forEach(function (r) { r.onchange = function () { ship = r.value; renderCk(); }; });
           $("ckItems").innerHTML = summaryHtml(cart); fillThumbs($("ckItems"));
+          $("ckTgN").textContent = count() + (count() > 1 ? " peças" : " peça");
           $("ckSums").innerHTML = sumsHtml(payMode());
         }
         document.querySelectorAll('input[name="pay"]').forEach(function (r) { r.onchange = function () { $("ckSums").innerHTML = sumsHtml(payMode()); }; });
@@ -1198,6 +1302,7 @@
           if (!/^https:\/\//.test(API)) return;
           fetch(API.replace(/\/$/, "") + "/estoque").then(function (r) { return r.json(); }).then(function (st) {
             Object.keys(st).forEach(function (id) { if (P[id]) P[id].stock = st[id]; });
+            if (cleanBag()) updateCount();
             updateCards(); renderBag();
           }).catch(function () {});
         }
@@ -1215,10 +1320,12 @@
           $("okMsg").textContent = falhou ? "Nenhum valor foi cobrado. Você pode montar a sacola de novo e tentar outra forma de pagamento." : st === "approved" ? "O comprovante do Mercado Pago chega no seu e-mail, e a loja fala com você no WhatsApp pra combinar o envio." : "Assim que o pagamento for confirmado, a loja fala com você no WhatsApp pra combinar o envio.";
           $("okSum").innerHTML = saved && saved.ref === ref && !falhou ? saved.html : "";
           fillThumbs($("okSum"));
-          if (!falhou) try { localStorage.removeItem("jac_pedido"); } catch (e) {}
+          if (!falhou) { try { localStorage.removeItem("jac_pedido"); } catch (e) {} cart = []; ship = null; cep = ""; updateCount(); renderBag(); }
           $("ckFlow").hidden = true; ok.hidden = false; ck.classList.add("on"); lock(); ck.scrollTop = 0;
         }
 
+        (function () { var q = new URLSearchParams(location.search), st = q.get("collection_status") || q.get("status") || "";
+          if (!q.get("pedido") || q.get("falhou") || st === "rejected" || st === "null") restoreBag(); })();
         updateCards(); renderBag(); loadStock(); backFromMP();
       })();
     </script>
