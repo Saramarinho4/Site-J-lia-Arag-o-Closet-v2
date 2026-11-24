@@ -384,7 +384,7 @@
       /* a loja */
       .loja { position: relative; overflow: hidden; background: linear-gradient(180deg, transparent, rgba(232, 217, 197, 0.45)); border-top: var(--line); }
       .loja__in { display: grid; gap: 56px; align-items: center; }
-      .loja__photos { position: relative; max-width: 520px; width: 100%; margin: 0 auto; padding: 24px 10px 40px; }
+      .loja__photos { position: relative; max-width: 600px; width: 100%; margin: 0 auto; padding: 24px 10px 40px; }
       .polaroid { position: relative; background: #fffdf9; padding: 12px 12px 54px; box-shadow: 0 2px 0 rgba(59, 34, 25, 0.04), 0 30px 60px -30px rgba(59, 34, 25, 0.45); }
       .polaroid img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; }
       .polaroid figcaption { position: absolute; left: 22px; right: 0; bottom: 12px; text-align: left; font-family: var(--script); font-size: 30px; color: var(--choco); line-height: 1; }
@@ -393,6 +393,7 @@
       .polaroid--mini img { aspect-ratio: 3 / 4; }
       .polaroid--mini figcaption { font-size: 22px; bottom: 6px; left: 0; text-align: center; }
       .polaroid--main { margin: 0 4%; }
+      .polaroid img.fachada { aspect-ratio: 1 / 1; object-position: 50% 40%; }
       .tape { position: absolute; top: -12px; left: 50%; width: 96px; height: 26px; margin-left: -48px; background: rgba(242, 203, 193, 0.75); transform: rotate(-4deg); box-shadow: 0 1px 2px rgba(59, 34, 25, 0.08); }
       .polaroid--mini .tape { width: 64px; margin-left: -32px; background: rgba(246, 231, 168, 0.8); transform: rotate(6deg); }
       .loja__copy .label { color: var(--laranja-texto); }
@@ -429,6 +430,10 @@
       .opts .swatch { border-radius: 50%; }
       .thumbs { left: 14px; bottom: 14px; }
       .thumbs button { border-radius: 8px; }
+      .thumbs .thumb--vid { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; background: var(--choco); color: var(--off); opacity: 0.9; font-size: 16px; }
+      .thumbs .thumb--vid small { font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; }
+      .modal__ph video { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; display: block; background: var(--bege); }
+      .badge--vid { background: rgba(59, 34, 25, 0.82); color: #fbf8f3; }
       .modal__info .opt-title { margin-top: 20px; }
       @media (max-width: 759px) { .modal__box { display: block; } .modal__ph { aspect-ratio: 4 / 5; } }
       .polaroid--mini figcaption { font-size: 20px; white-space: nowrap; }
@@ -580,7 +585,7 @@
               <div class="card__body"><span class="card__cat label">Conjuntos</span><h3>Conjunto Alfaiataria</h3><span class="price">R$ 149,99</span><span class="pix"><b>R$ 142,49 no Pix</b> (5% off)</span><span class="pix">ou 2x de R$ 75,00 sem juros</span><span class="card__see label">Ver peça</span></div>
             </button>
             <button class="card fade" data-id="regatas" data-cat="Básicos">
-              <div class="card__ph"><div class="soldout"><span class="label">Esgotado</span></div><img src="img/jac-regatas-basiquinhas.jpg" loading="lazy" alt="Regatas Basiquinhas em bege e preta" /></div>
+              <div class="card__ph"><div class="soldout"><span class="label">Esgotado</span></div><img src="img/jac-regatas-basiquinhas.jpg" loading="lazy" alt="Regata Basiquinha bege" /></div>
               <div class="card__body"><span class="card__cat label">Básicos</span><h3>Regatas Basiquinhas</h3><span class="price">R$ 39,99</span><span class="pix"><b>R$ 37,99 no Pix</b> (5% off)</span><span class="pix">ou 2x de R$ 20,00 sem juros</span><span class="card__see label">Ver peça</span></div>
             </button>
           </div>
@@ -623,7 +628,7 @@
       <section class="sec loja" id="a-loja">
         <div class="wrap loja__in">
           <div class="loja__photos fade">
-            <figure class="polaroid polaroid--main"><span class="tape" aria-hidden="true"></span><img src="img/jac-fachada-loja.jpg" alt="Fachada da loja Júlia Aragão Closet, com vitrine e manequins" loading="lazy" /><figcaption>nossa lojinha ✦</figcaption></figure>
+            <figure class="polaroid polaroid--main"><span class="tape" aria-hidden="true"></span><img class="fachada" src="img/jac-fachada-loja.jpg" alt="Fachada da loja Júlia Aragão Closet, com o letreiro vermelho e a coluna de balões" loading="lazy" /><figcaption>nossa loja ✦</figcaption></figure>
           </div>
           <div class="loja__copy fade">
             <p class="label">Nossa loja tá de portas abertas ✦</p>
@@ -773,7 +778,7 @@
           },
           moletinho: { name: "Conjunto Moletinho", cat: "Conjuntos", price: 169.99, pix: 161.49, fit: "Veste até o 44", desc: "Conjunto no moletinho, confortável e arrumadinho. Última peça disponível.", stock: { G: 1 } },
           alfaiataria: { name: "Conjunto Alfaiataria", cat: "Conjuntos", price: 149.99, pix: 142.49, fit: "Veste até o 44", desc: "Conjunto na alfaiataria: blusa frente única com amarração nas costas e short.", stock: { G: 1 } },
-          regatas: { name: "Regatas Basiquinhas", cat: "Básicos", price: 39.99, pix: 37.99, stock: { "Único": 8 }, colors: ["Bege", "Preta"] }
+          regatas: { name: "Regatas Basiquinhas", cat: "Básicos", price: 39.99, pix: 37.99, stock: { "Único": 2 /* 2 últimas, cores claras; 2ª cor a confirmar */ }, ultima: true, colors: ["Bege"] }
         };
 
         /* ============================================================
@@ -789,24 +794,31 @@
         var OCC_NATAL = "Ceia de Natal", OCC_CONF = "Confraternização", OCC_REV = "Réveillon";
         var NOVAS = {
           /* --- Coleção Celebrar (Natal e Ano-Novo) --- */
-          longoVermelho: { name: "Vestido longo vermelho na malha poliamida", cat: "Vestidos", price: 129.99, veste: "44", col: "celebrar", occ: [OCC_NATAL, OCC_CONF], stock: { "Único": 1 /* a confirmar */ },
+          longoVermelho: { video: "vid-vestido-longo-vermelho.mp4", name: "Vestido longo vermelho na malha poliamida", cat: "Vestidos", price: 129.99, veste: "44", stock: { "Único": 1 /* a confirmar */ },
             desc: "Vestido longo na malha poliamida, tamanho único.", photos: [["jac-vestido-longo-vermelho-frente.jpg", "Modelo de frente com o vestido longo vermelho"], ["jac-vestido-longo-vermelho-costas.jpg", "Vestido longo vermelho visto de lado e de costas"]] },
-          longoAmarelo: { name: "Vestido longo amarelo na alfaiataria", cat: "Vestidos", price: 139.99, veste: "42", col: "celebrar", occ: [OCC_REV, OCC_CONF], stock: { "Único": 1 /* a confirmar */ },
+          longoAmarelo: { video: "vid-vestido-longo-amarelo.mp4", name: "Vestido longo amarelo na alfaiataria", cat: "Vestidos", price: 139.99, veste: "42", col: "celebrar", occ: [OCC_REV, OCC_CONF], stock: { "Único": 1 /* a confirmar */ },
             desc: "Vestido longo tomara que caia na alfaiataria, com laço nas costas. Tamanho único.", photos: [["jac-vestido-longo-amarelo-frente.jpg", "Modelo de frente com o vestido longo amarelo tomara que caia"], ["jac-vestido-longo-amarelo-costas.jpg", "Costas do vestido longo amarelo, com laço"]] },
-          longoAzul: { name: "Vestido longo azul claro no crepe duna", cat: "Vestidos", price: 89.99, veste: "42", col: "celebrar", occ: [OCC_REV, OCC_CONF], stock: { "Único": 1 /* a confirmar */ },
+          longoAzul: { video: "vid-vestido-longo-azul-claro.mp4", name: "Vestido longo azul claro no crepe duna", cat: "Vestidos", price: 89.99, veste: "42", col: "celebrar", occ: [OCC_REV, OCC_CONF], stock: { "Único": 1 /* a confirmar */ },
             desc: "Vestido longo frente única no crepe duna, com as costas abertas. Tamanho único.", photos: [["jac-vestido-longo-azul-claro-frente.jpg", "Modelo de frente com o vestido longo azul claro frente única"], ["jac-vestido-longo-azul-claro-costas.jpg", "Costas abertas do vestido longo azul claro"]] },
           crepeVermelho: { name: "Vestido no crepe duna vermelho", cat: "Vestidos", price: 94.99, veste: "46", col: "celebrar", occ: [OCC_NATAL], stock: { GG: 1 /* a confirmar */ },
             desc: "Vestido no crepe duna vermelho, tamanho GG.", photos: [["jac-vestido-crepe-duna-vermelho.jpg", "Modelo com o vestido vermelho no crepe duna"]] },
           marrantVermelho: { name: "Conjunto no Marrant vermelho", cat: "Conjuntos", price: 194.99, veste: "40", ultima: true, col: "celebrar", occ: [OCC_NATAL, OCC_CONF], stock: { P: 1 },
             desc: "Conjunto no Marrant vermelho, tamanho P. Última peça.", photos: [["jac-conjunto-marrant-vermelho.jpg", "Modelo com o conjunto vermelho no Marrant, blusa e calça"]] },
-          vestLongoOff: { name: "Vestido longo off-white na alfaiataria", cat: "Vestidos", price: 149.99, ultima: true, col: "celebrar", occ: [OCC_REV, OCC_CONF], stock: { M: 1 },
+          vestLongoOff: { video: "vid-vestido-longo-off-white.mp4", name: "Vestido longo off-white na alfaiataria", cat: "Vestidos", price: 149.99, ultima: true, col: "celebrar", occ: [OCC_REV, OCC_CONF], stock: { M: 1 },
             desc: "Vestido longo na alfaiataria, com drapeado na cintura. Tamanho M, peça única.", photos: [["jac-vestido-longo-off-white-frente.jpg", "Modelo de frente com o vestido longo off-white na alfaiataria"], ["jac-vestido-longo-off-white-lado.jpg", "Vestido longo off-white com drapeado, visto de frente"], ["jac-vestido-longo-off-white-costas.jpg", "Vestido longo off-white visto de costas"]] },
-          vestFluidoMarrom: { name: "Vestido longo fluido na alfaiataria marrom", cat: "Vestidos", price: 149.99, veste: "42", ultima: true, col: "celebrar", occ: [OCC_NATAL, OCC_CONF], stock: { G: 1 },
+          vestFluidoMarrom: { video: "vid-vestido-fluido-marrom.mp4", name: "Vestido longo fluido na alfaiataria marrom", cat: "Vestidos", price: 149.99, veste: "42", ultima: true, col: "celebrar", occ: [OCC_NATAL, OCC_CONF], stock: { G: 1 },
             desc: "Vestido longo e fluido na alfaiataria, com botões e faixa na cintura. Tamanho G, veste até o 42 (forma pequena). Peça única.", photos: [["jac-vestido-fluido-marrom.jpg", "Modelo com o vestido longo marrom fluido na alfaiataria"], ["jac-vestido-fluido-marrom-2.jpg", "Vestido longo marrom fluido, de corpo inteiro"]] },
-          bodyPaete: { name: "Body com paetê", cat: "Bodies", price: 39.99, veste: "42", col: "celebrar", occ: [OCC_REV, OCC_CONF], stock: { "Único": 1 /* a confirmar */ },
+          bodyPaete: { name: "Body com paetê", cat: "Bodies", price: 39.99, veste: "42", stock: { "Único": 1 /* a confirmar */ },
             desc: "Body com paetê, tamanho único.", photos: [["jac-body-paete.jpg", "Modelo com o body de paetê preto"]] },
-          conjPaete: { name: "Conjunto no paetê", cat: "Conjuntos", price: 79.99, veste: "42", col: "celebrar", occ: [OCC_REV, OCC_CONF], stock: { "Único": 1 /* a confirmar */ },
+          conjPaete: { name: "Conjunto no paetê", cat: "Conjuntos", price: 79.99, veste: "42", stock: { "Único": 1 /* a confirmar */ },
             desc: "Conjunto no paetê, tamanho único.", photos: [["jac-conjunto-paete.jpg", "Modelo com o conjunto de paetê"]] },
+
+          saiaMarrant: { name: "Saia longa no Marrant", cat: "Saias", price: 149.99, col: "celebrar", occ: [OCC_NATAL, OCC_CONF, OCC_REV], byColor: true,
+            colors: [{ n: "Azul-marinho", hex: "#1F2A4D" }, { n: "Branca", hex: "#F4F1EA" }, { n: "Marrom", hex: "#4A2A1E" }, { n: "Bege", hex: "#D6BC9C" }, { n: "Preta", hex: "#1E1A18" }],
+            stock: { "Azul-marinho": { M: 1, G: 1, GG: 1 }, Branca: { M: 1, G: 1, GG: 1 }, Marrom: { M: 1, G: 1, GG: 1 }, Bege: { M: 1, G: 1, GG: 1 }, Preta: { M: 1, G: 1, GG: 1 } /* a confirmar quantidade por cor */ },
+            desc: "Saia longa e evasê no tecido Marrant, com bolsos e cintura com passantes. Disponível no M, G e GG, em 5 cores. Nas fotos, a Simone usa o tamanho M.",
+            video: "vid-saias-marrant-cores.mp4", video2: "vid-saia-marrant-branca.mp4",
+            photos: [["jac-saia-marrant-marinho-frente.jpg", "Modelo com a saia longa azul-marinho no Marrant e blusa marrom"], ["jac-saia-marrant-marinho-lado.jpg", "Saia longa azul-marinho no Marrant, de lado"], ["jac-saia-marrant-branca-frente.jpg", "Modelo com a saia longa branca no Marrant e blusa preta"], ["jac-saia-marrant-branca-lado.jpg", "Saia longa branca no Marrant, de corpo inteiro"]] },
 
           /* --- Vitrine: Vestidos --- */
           vestViscosePreto: { name: "Vestido no viscolinho preto", cat: "Vestidos", price: 109.99, veste: "44", stock: { G: 1 /* a confirmar */ }, photos: [["jac-vestido-viscose-preto.jpg", "Modelo com o vestido preto na viscose"]] },
@@ -821,10 +833,10 @@
           tubinhoTule: { name: "Tubinho com detalhe de tule", cat: "Vestidos", price: 69.99, veste: "40", stock: { "Único": 1 /* a confirmar */ }, photos: [["jac-tubinho-tule.jpg", "Modelo com o tubinho verde com detalhe de tule"]] },
 
           /* --- Vitrine: Conjuntos --- */
-          conjMagenta: { name: "Conjunto alfaiataria magenta (cropped + short)", cat: "Conjuntos", price: 129.99, ultima: true, stock: { M: 1 }, photos: [["jac-conjunto-magenta-frente.jpg", "Conjunto magenta na alfaiataria, cropped e short, de frente"], ["jac-conjunto-magenta-costas.jpg", "Conjunto magenta, costas do cropped com laço"]] },
+          conjMagenta: { video: "vid-conjunto-magenta.mp4", name: "Conjunto alfaiataria magenta (cropped + short)", cat: "Conjuntos", price: 129.99, ultima: true, stock: { M: 1 }, photos: [["jac-conjunto-magenta-frente.jpg", "Conjunto magenta na alfaiataria, cropped e short, de frente"], ["jac-conjunto-magenta-costas.jpg", "Conjunto magenta, costas do cropped com laço"]] },
           conjViscoseVerde: { name: "Conjunto na viscose verde", cat: "Conjuntos", price: 59.99, veste: "40", stock: { P: 1 /* a confirmar */ }, photos: [["jac-conjunto-viscose-verde.jpg", "Modelo com o conjunto verde na viscose, blusa e calça"]] },
           conjColeteBermuda: { name: "Conjunto colete com bermuda bordado", cat: "Conjuntos", price: 149.99, ultima: true, stock: { P: 1 }, photos: [["jac-conjunto-colete-bermuda-bordado.jpg", "Modelo com o conjunto de colete e bermuda bordados"]] },
-          conjColetePantalona: { name: "Conjunto colete e pantalona alfaiataria", cat: "Conjuntos", price: 159.99, ultima: true, stock: { P: 1 }, photos: [["jac-conjunto-colete-pantalona.jpg", "Modelo com o conjunto de colete e pantalona na alfaiataria"]] },
+          conjColetePantalona: { video: "vid-conjunto-colete-pantalona.mp4", name: "Conjunto colete e pantalona alfaiataria", cat: "Conjuntos", price: 159.99, ultima: true, stock: { P: 1 }, photos: [["jac-conjunto-colete-pantalona.jpg", "Modelo com o conjunto de colete e pantalona na alfaiataria"]] },
           conjSaiaOffWhite: { name: "Conjunto alfaiataria cropped e saia off-white", cat: "Conjuntos", price: 119.99, ultima: true, stock: { M: 1 }, photos: [["jac-conjunto-cropped-saia-off-white.jpg", "Modelo com o conjunto off-white de cropped e saia"]] },
           conjCroppedPantalona: { name: "Conjunto cropped e pantalona no crepe", cat: "Conjuntos", price: 194.99, ultima: true, stock: { P: 1 }, photos: [["jac-conjunto-cropped-pantalona-crepe.jpg", "Modelo com o conjunto preto de cropped e pantalona no crepe"]] },
           conjBermudaCinza: { name: "Conjunto alfaiataria cropped e bermuda cinza", cat: "Conjuntos", price: 119.99, ultima: true, stock: { M: 1 }, photos: [["jac-conjunto-cropped-bermuda-cinza.jpg", "Modelo com o conjunto cinza de cropped e bermuda"]] },
@@ -907,6 +919,7 @@
           if (p.col === "celebrar") badges.push('<span class="badge badge--new label">Nova coleção</span>');
           if (p.old) badges.push('<span class="badge badge--hot label">' + Math.round((1 - p.price / p.old) * 100) + "% OFF</span>");
           if (p.ultima) badges.push('<span class="badge label">Última peça</span>');
+          if (p.video) badges.push('<span class="badge badge--vid label">&#9654; Vídeo</span>');
           var imgs = p.photos.map(function (f, i) { return '<img src="img/' + f[0] + '" alt="' + f[1] + '" loading="lazy"' + (i ? " hidden" : "") + " />"; }).join("");
           b.innerHTML = '<div class="card__ph">' + (badges.length ? '<div class="badges">' + badges.join("") + "</div>" : "") + '<div class="soldout"><span class="label">Esgotado</span></div>' + imgs + "</div>" +
             '<div class="card__body">' + (p.occ ? '<span class="card__occ">' + p.occ.join(" · ") + "</span>" : '<span class="card__cat label">' + p.cat + "</span>") +
@@ -919,7 +932,7 @@
         /* overlays */
         var scrim = $("scrim"), modal = $("modal"), drawer = $("drawer"), ck = $("ck");
         function lock() { document.body.classList.toggle("lock", modal.classList.contains("on") || drawer.classList.contains("on") || ck.classList.contains("on")); }
-        function closeAll() { modal.classList.remove("on"); drawer.classList.remove("on"); drawer.setAttribute("aria-hidden", "true"); scrim.classList.remove("on"); lock(); if (lastFocus) lastFocus.focus(); }
+        function closeAll() { var mv = $("mPh").querySelector("video"); if (mv) mv.pause(); modal.classList.remove("on"); drawer.classList.remove("on"); drawer.setAttribute("aria-hidden", "true"); scrim.classList.remove("on"); lock(); if (lastFocus) lastFocus.focus(); }
         function openDrawer() { modal.classList.remove("on"); renderBag(); drawer.classList.add("on"); drawer.setAttribute("aria-hidden", "false"); scrim.classList.add("on"); lock(); drawer.querySelector("[data-close]").focus(); }
         scrim.onclick = closeAll;
         document.querySelectorAll("[data-close]").forEach(function (b) { b.onclick = closeAll; });
@@ -962,14 +975,25 @@
           scrim.classList.add("on"); modal.classList.add("on"); lock();
           modal.querySelector("[data-close]").focus();
         }
+        function vids(id) { var p = P[id]; return [p.video, p.video2].filter(Boolean); }
+        function vidEl(src) {
+          var v = document.createElement("video");
+          v.src = "img/" + src; v.muted = true; v.loop = true; v.autoplay = true; v.playsInline = true; v.controls = true;
+          v.setAttribute("playsinline", ""); v.setAttribute("preload", "metadata"); v.setAttribute("aria-label", "Vídeo da peça " + P[cur.id].name);
+          var pr = v.play && v.play(); if (pr && pr.catch) pr.catch(function () {});
+          return v;
+        }
         function renderPhotos() {
-          var ph = $("mPh"), n = photos(cur.id).length;
-          ph.innerHTML = ""; ph.appendChild(img(cur.id, cur.ph));
-          if (n < 2) return;
+          var ph = $("mPh"), n = photos(cur.id).length, vs = vids(cur.id), tot = n + vs.length;
+          ph.innerHTML = ""; ph.appendChild(cur.ph < n ? img(cur.id, cur.ph) : vidEl(vs[cur.ph - n]));
+          if (tot < 2) return;
           var t = document.createElement("div"); t.className = "thumbs";
-          for (var i = 0; i < n; i++) (function (i) {
-            var b = document.createElement("button"); b.setAttribute("aria-label", "Foto " + (i + 1)); b.setAttribute("aria-pressed", i === cur.ph);
-            b.appendChild(img(cur.id, i)); b.onclick = function () { cur.ph = i; renderPhotos(); ph.querySelector('.thumbs [aria-pressed="true"]').focus(); };
+          for (var i = 0; i < tot; i++) (function (i) {
+            var b = document.createElement("button"), isV = i >= n;
+            b.setAttribute("aria-label", isV ? "Ver vídeo" + (vs.length > 1 ? " " + (i - n + 1) : "") : "Foto " + (i + 1)); b.setAttribute("aria-pressed", i === cur.ph);
+            if (isV) { b.className = "thumb--vid"; b.innerHTML = '<span aria-hidden="true">&#9654;</span><small>Vídeo</small>'; }
+            else b.appendChild(img(cur.id, i));
+            b.onclick = function () { cur.ph = i; renderPhotos(); ph.querySelector('.thumbs [aria-pressed="true"]').focus(); };
             t.appendChild(b);
           })(i);
           ph.appendChild(t);
