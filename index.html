@@ -165,10 +165,10 @@
       .vipsec { position: relative; }
       .vipsec::before { content: ""; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22260%22%20height%3D%22220%22%20viewBox%3D%220%200%20260%20220%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%233B2219%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cg%20transform%3D%22translate%2818%2020%29%20rotate%28-8%2050%2030%29%22%3E%3Cpath%20d%3D%22M50%2022v-5c0-3%205-4%205-9%200-4-3-6-6-6s-6%202-6%206%22%20/%3E%3Cpath%20d%3D%22M50%2022L7%2045c-3%201.5-2%204%201%204h84c3%200%204-2.5%201-4z%22%20/%3E%3C/g%3E%3Cg%20transform%3D%22translate%28150%2070%29%20rotate%2810%2050%2030%29%20scale%28.8%29%22%3E%3Cpath%20d%3D%22M50%2022v-5c0-3%205-4%205-9%200-4-3-6-6-6s-6%202-6%206%22%20/%3E%3Cpath%20d%3D%22M50%2022L7%2045c-3%201.5-2%204%201%204h84c3%200%204-2.5%201-4z%22%20/%3E%3C/g%3E%3Cg%20transform%3D%22translate%2840%20140%29%20rotate%284%2050%2030%29%20scale%28.9%29%22%3E%3Cpath%20d%3D%22M50%2022v-5c0-3%205-4%205-9%200-4-3-6-6-6s-6%202-6%206%22%20/%3E%3Cpath%20d%3D%22M50%2022L7%2045c-3%201.5-2%204%201%204h84c3%200%204-2.5%201-4z%22%20/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); background-size: 260px 220px; opacity: 0.07; pointer-events: none; }
       .vipsec .wrap { position: relative; }
-      .vip { position: relative; max-width: 640px; margin: 0 auto; background: var(--off); padding: clamp(56px, 8vw, 80px) clamp(28px, 6vw, 72px) clamp(44px, 6vw, 64px); text-align: center; transform: rotate(-1.4deg); box-shadow: 0 1px 0 rgba(59, 34, 25, 0.05), 0 22px 50px -24px rgba(59, 34, 25, 0.35); border: 1px solid rgba(201, 139, 90, 0.3); }
+      .vip { position: relative; max-width: 640px; margin: 0 auto; background: var(--off); padding: clamp(56px, 8vw, 80px) clamp(28px, 6vw, 72px) clamp(44px, 6vw, 64px); text-align: center; transform: none; box-shadow: 0 1px 0 rgba(59, 34, 25, 0.05), 0 22px 50px -24px rgba(59, 34, 25, 0.35); border: 1px solid rgba(201, 139, 90, 0.3); }
       .vip::after { content: ""; position: absolute; inset: 10px; border: var(--line); pointer-events: none; }
-      .vip > * { transform: rotate(1.4deg); }
-      .vip__clip { position: absolute; top: -34px; left: 50%; width: 64px; height: 74px; margin-left: -32px; transform: rotate(4deg); }
+      .vip > * { transform: none; }
+      .vip__clip { position: absolute; top: -34px; left: 50%; width: 64px; height: 74px; margin-left: -32px; transform: none; }
       .vip h2 { font-size: clamp(32px, 5vw, 50px); margin: 4px 0 6px; }
       .vip .script { font-size: clamp(44px, 7vw, 64px); display: block; line-height: 1.2; margin-bottom: 28px; }
       .vip .label { color: var(--terracota); }
@@ -873,7 +873,7 @@
             desc: "Vestido longo tomara que caia na alfaiataria, com laço nas costas. Tamanho único.", photos: [["jac-vestido-longo-amarelo-frente.jpg", "Modelo de frente com o vestido longo amarelo tomara que caia"], ["jac-vestido-longo-amarelo-costas.jpg", "Costas do vestido longo amarelo, com laço"]] },
           longoAzul: { video: "vid-vestido-longo-azul-claro.mp4", name: "Vestido longo azul claro no crepe duna", cat: "Vestidos", price: 89.99, veste: "42", col: "celebrar", occ: [OCC_REV, OCC_CONF], stock: { "Único": 1 /* a confirmar */ },
             desc: "Vestido longo frente única no crepe duna, com as costas abertas. Tamanho único.", photos: [["jac-vestido-longo-azul-claro-frente.jpg", "Modelo de frente com o vestido longo azul claro frente única"], ["jac-vestido-longo-azul-claro-costas.jpg", "Costas abertas do vestido longo azul claro"]] },
-          crepeVermelho: { name: "Vestido no crepe duna vermelho", cat: "Vestidos", price: 94.99, veste: "46", col: "celebrar", occ: [OCC_NATAL], stock: { GG: 1 /* a confirmar */ },
+          crepeVermelho: { name: "Vestido no crepe duna vermelho", cat: "Vestidos", price: 94.99, veste: "46", stock: { GG: 1 /* a confirmar */ },
             desc: "Vestido no crepe duna vermelho, tamanho GG.", photos: [["jac-vestido-crepe-duna-vermelho.jpg", "Modelo com o vestido vermelho no crepe duna"]] },
           marrantVermelho: { name: "Conjunto no Marrant vermelho", cat: "Conjuntos", price: 194.99, veste: "40", ultima: true, col: "celebrar", occ: [OCC_NATAL, OCC_CONF], stock: { P: 1 },
             desc: "Conjunto no Marrant vermelho, tamanho P. Última peça.", photos: [["jac-conjunto-marrant-vermelho.jpg", "Modelo com o conjunto vermelho no Marrant, blusa e calça"]] },
