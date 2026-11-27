@@ -135,7 +135,7 @@
       @media (min-width: 860px) { .grid { grid-template-columns: repeat(3, 1fr); } }
       @media (min-width: 1180px) { .grid { grid-template-columns: repeat(4, 1fr); } }
       .card { text-align: left; display: flex; flex-direction: column; width: 100%; }
-      .card[hidden] { display: none; }
+      .card[hidden], .card.is-off { display: none !important; }
       .card__ph { position: relative; aspect-ratio: 3 / 4; overflow: hidden; background: var(--off); }
       .card__ph img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.1s var(--ease); }
       .card:hover .card__ph img { transform: scale(1.05); }
@@ -1005,7 +1005,7 @@
           if (p.old) badges.push('<span class="badge badge--hot label">' + Math.round((1 - p.price / p.old) * 100) + "% OFF</span>");
           if (p.ultima) badges.push('<span class="badge label">Última peça</span>');
           if (p.video) badges.push('<span class="badge badge--vid label">&#9654; Vídeo</span>');
-          var imgs = p.photos.map(function (f, i) { return '<img src="img/' + f[0] + '" alt="' + f[1] + '" loading="lazy"' + (i ? " hidden" : "") + " />"; }).join("");
+          var imgs = p.photos.map(function (f, i) { return '<img src="' + (/^https?:/.test(f[0]) ? f[0] : "img/" + f[0]) + '" alt="' + f[1] + '" loading="lazy"' + (i ? " hidden" : "") + " />"; }).join("");
           b.innerHTML = '<div class="card__ph">' + (badges.length ? '<div class="badges">' + badges.join("") + "</div>" : "") + '<div class="soldout"><span class="label">Esgotado</span></div>' + imgs + "</div>" +
             '<div class="card__body">' + (p.occ ? '<span class="card__occ">' + p.occ.join(" · ") + "</span>" : '<span class="card__cat label">' + p.cat + "</span>") +
             "<h3>" + p.name + '</h3><span class="card__size">' + sizeLine(p) + '</span><span class="price">' + priceHtml(p) + "</span>" +
@@ -1318,13 +1318,49 @@
         } else fades.forEach(function (f) { f.classList.add("in"); });
 
         /* estoque real vindo do servidor */
+        function cardPreco(c, p) {
+          var pr = c.querySelector(".price"), px = c.querySelectorAll(".pix");
+          if (pr) pr.innerHTML = priceHtml(p);
+          if (px[0]) px[0].innerHTML = "<b>" + fmt(p.pix) + " no Pix</b> (5% off)";
+          if (px[1]) px[1].innerHTML = "ou " + parc(p.price) + " sem juros";
+        }
+        /* catálogo vindo da planilha (via servidor): preço, estoque, peças novas e esconder */
+        function aplicaCatalogo(cat) {
+          Object.keys(cat).forEach(function (id) {
+            var c = cat[id], p = P[id], card;
+            if (p) {
+              if (c.price) { if (p.old && c.price >= p.old) delete p.old; p.price = c.price; p.pix = c.pix; }
+              p.stock = c.stock; if (c.cod) p.cod = c.cod;
+              if (c.desc && !p.desc) p.desc = c.desc;
+              card = document.querySelector('.card[data-id="' + id + '"]');
+              if (card) { cardPreco(card, p); card.classList.toggle("is-off", c.show === false); if (c.show === false) card.hidden = true; }
+              return;
+            }
+            if (c.show === false || !c.fotos || !c.fotos.length) return;
+            p = P[id] = { name: c.name, cat: c.cat, price: c.price, pix: c.pix, cod: c.cod, desc: c.desc, stock: c.stock, byColor: c.byColor,
+              photos: c.fotos.map(function (f) { return [f, c.name]; }) };
+            if (c.byColor) p.colors = c.colors.map(function (n) { return { n: n }; });
+            if (c.sec === "celebrar") { p.col = "celebrar"; p.occ = ["Ceia de Natal", "Confraternização", "Réveillon"]; }
+            card = makeCard(id); card.classList.add("in");
+            var t = document.createElement("span"); t.className = "code"; t.textContent = p.cod; card.querySelector(".card__ph").appendChild(t);
+            card.onclick = function () { lastFocus = card; openProduct(id); };
+            var g = $(p.col === "celebrar" ? "celebGrid" : "vitrineGrid"); g.insertBefore(card, g.firstChild);
+          });
+        }
         function loadStock() {
           if (!/^https:\/\//.test(API)) return;
-          fetch(API.replace(/\/$/, "") + "/estoque").then(function (r) { return r.json(); }).then(function (st) {
-            Object.keys(st).forEach(function (id) { if (P[id]) P[id].stock = st[id]; });
+          var base = API.replace(/\/$/, "");
+          fetch(base + "/catalogo").then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (cat) {
+            aplicaCatalogo(cat);
             if (cleanBag()) updateCount();
             updateCards(); renderBag();
-          }).catch(function () {});
+          }).catch(function () {
+            fetch(base + "/estoque").then(function (r) { return r.json(); }).then(function (st) {
+              Object.keys(st).forEach(function (id) { if (P[id]) P[id].stock = st[id]; });
+              if (cleanBag()) updateCount();
+              updateCards(); renderBag();
+            }).catch(function () {});
+          });
         }
         /* volta do Mercado Pago */
         function backFromMP() {
