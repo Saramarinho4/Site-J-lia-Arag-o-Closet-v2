@@ -509,6 +509,14 @@
         .ck__hd { position: sticky; }
         .ck__ttl { font-size: 26px; }
       }
+      .code { position: absolute; top: 10px; right: 10px; z-index: 2; min-width: 34px; height: 34px; padding: 0 6px; border-radius: 999px; display: grid; place-items: center; background: rgba(251, 247, 241, 0.88); color: var(--choco); border: 1px solid rgba(201, 139, 90, 0.55); font-size: 10px; font-weight: 600; letter-spacing: 0.06em; backdrop-filter: blur(4px); pointer-events: none; }
+      .codefind { display: flex; justify-content: center; gap: 8px; margin: -28px auto 40px; max-width: 360px; }
+      .codefind input { flex: 1; min-height: 42px; border-radius: 999px; border: var(--line); background: #fffdf9; padding: 0 18px; font-size: 13px; text-transform: uppercase; }
+      .codefind input::placeholder { text-transform: none; color: var(--choco-2); }
+      .codefind input:focus { outline: none; border-color: var(--laranja); }
+      .codefind button { min-height: 42px; padding: 0 18px; border-radius: 999px; background: var(--choco); color: #fbf7f1; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; }
+      .codefind__msg { text-align: center; font-size: 12px; color: #b3261e; margin: -32px 0 30px; min-height: 0; }
+      .modal__code { font-size: 11px; letter-spacing: 0.14em; color: var(--choco-2); margin-left: 6px; }
     </style>
   </head>
   <body>
@@ -606,8 +614,8 @@
 
       <div class="marquee" aria-label="Novidades toda semana, peças escolhidas a dedo, Pix e cartão, envio pra todo o Brasil">
         <div class="marquee__track" aria-hidden="true">
-          <span class="label">Novidades toda semana<i>✦</i>Peças escolhidas a dedo<i>✦</i>Pix ou 2x sem juros<i>✦</i>Envio pra todo o Brasil<i>✦</i>Compra 100% segura<i>✦</i></span>
-          <span class="label">Novidades toda semana<i>✦</i>Peças escolhidas a dedo<i>✦</i>Pix ou 2x sem juros<i>✦</i>Envio pra todo o Brasil<i>✦</i>Compra 100% segura<i>✦</i></span>
+          <span class="label">Novidades toda semana<i>✦</i>Peças escolhidas a dedo<i>✦</i>Pix ou até 3x sem juros<i>✦</i>Envio pra todo o Brasil<i>✦</i>Compra 100% segura<i>✦</i></span>
+          <span class="label">Novidades toda semana<i>✦</i>Peças escolhidas a dedo<i>✦</i>Pix ou até 3x sem juros<i>✦</i>Envio pra todo o Brasil<i>✦</i>Compra 100% segura<i>✦</i></span>
         </div>
       </div>
 
@@ -642,6 +650,8 @@
             <button class="label" data-f="Macacões" aria-pressed="false">Macacões</button>
             <button class="label" data-f="Básicos" aria-pressed="false">Básicos</button>
           </div>
+          <form class="codefind fade" id="codeFind" role="search" aria-label="Buscar peça pelo código"><input id="codeIn" inputmode="text" maxlength="4" placeholder="Tem o código? Ex.: P34" aria-label="Código da peça" /><button type="submit">Buscar</button></form>
+          <p class="codefind__msg" id="codeMsg" role="status"></p>
           <div class="grid" id="vitrineGrid">
             <button class="card fade" data-id="body" data-cat="Bodies">
               <div class="card__ph"><span class="badge badge--hot label">Novidade</span><div class="soldout"><span class="label">Esgotado</span></div><img src="img/jac-body-modelo.jpg" alt="Modelo vestindo o Body Poliamida terracota" /><img src="img/jac-body-cores.jpg" alt="Body Poliamida em cabides nas cores terracota, bege e preto" loading="lazy" hidden /></div>
@@ -649,14 +659,14 @@
             </button>
             <button class="card fade" data-id="moletinho" data-cat="Conjuntos">
               <div class="card__ph"><span class="badge label">Última peça</span><div class="soldout"><span class="label">Esgotado</span></div><img src="img/jac-conjunto-moletinho.jpg" alt="Conjunto Moletinho azul-marinho" loading="lazy" /></div>
-              <div class="card__body"><span class="card__cat label">Conjuntos</span><h3>Conjunto Moletinho</h3><span class="price">R$ 169,99</span><span class="pix"><b>R$ 161,49 no Pix</b> (5% off)</span><span class="pix">ou 2x de R$ 85,00 sem juros</span><span class="card__see label">Ver peça</span></div>
+              <div class="card__body"><span class="card__cat label">Conjuntos</span><h3>Conjunto Moletinho</h3><span class="price">R$ 169,99</span><span class="pix"><b>R$ 161,49 no Pix</b> (5% off)</span><span class="pix">ou 3x de R$ 56,66 sem juros</span><span class="card__see label">Ver peça</span></div>
             </button>
             <button class="card fade" data-id="alfaiataria" data-cat="Conjuntos">
               <div class="card__ph"><span class="badge label">Última peça</span><div class="soldout"><span class="label">Esgotado</span></div><img src="img/jac-conjunto-alfaiataria-frente.jpg" alt="Conjunto Alfaiataria preto, de frente" loading="lazy" /><img src="img/jac-conjunto-alfaiataria-costas.jpg" alt="Conjunto Alfaiataria preto, de costas, com a amarração da blusa" loading="lazy" hidden /></div>
-              <div class="card__body"><span class="card__cat label">Conjuntos</span><h3>Conjunto Alfaiataria</h3><span class="price">R$ 149,99</span><span class="pix"><b>R$ 142,49 no Pix</b> (5% off)</span><span class="pix">ou 2x de R$ 75,00 sem juros</span><span class="card__see label">Ver peça</span></div>
+              <div class="card__body"><span class="card__cat label">Conjuntos</span><h3>Conjunto Alfaiataria</h3><span class="price">R$ 149,99</span><span class="pix"><b>R$ 142,49 no Pix</b> (5% off)</span><span class="pix">ou 3x de R$ 50,00 sem juros</span><span class="card__see label">Ver peça</span></div>
             </button>
             <button class="card fade" data-id="regatas" data-cat="Básicos">
-              <div class="card__ph"><div class="soldout"><span class="label">Esgotado</span></div><img src="img/jac-regatas-basiquinhas.jpg" loading="lazy" alt="Regata Basiquinha bege" /></div>
+              <div class="card__ph"><div class="soldout"><span class="label">Esgotado</span></div><img src="img/jac-regatas-offwhite-bege.jpg" loading="lazy" alt="Regatas basiquinhas off-white e bege no cabide" /><img src="img/jac-regatas-offwhite-bege-2.jpg" loading="lazy" hidden alt="Regatas basiquinhas off-white e bege, outro ângulo" /><img src="img/jac-regatas-basiquinhas.jpg" loading="lazy" hidden alt="Regata basiquinha bege" /></div>
               <div class="card__body"><span class="card__cat label">Básicos</span><h3>Regatas Basiquinhas</h3><span class="price">R$ 39,99</span><span class="pix"><b>R$ 37,99 no Pix</b> (5% off)</span><span class="pix">ou 2x de R$ 20,00 sem juros</span><span class="card__see label">Ver peça</span></div>
             </button>
           </div>
@@ -763,7 +773,7 @@
           <p class="modal__hint" id="mHint"></p>
           <ul class="modal__perks">
             <li>Envio pra todo o Brasil, com PAC ou SEDEX</li>
-            <li>Pix com 5% off ou 2x sem juros no cartão</li>
+            <li>Pix com 5% off ou até 3x sem juros no cartão (2x em compras até R$ 100)</li>
             <li>Pagamento seguro pelo Mercado Pago</li>
             <li><a href="https://wa.me/5562994877575" target="_blank" rel="noopener">Dúvida sobre o tamanho? Fale no WhatsApp</a></li>
           </ul>
@@ -817,7 +827,7 @@
             <h2>Pagamento</h2>
             <div class="pays">
               <label class="pay"><input type="radio" name="pay" value="Pix" checked /><strong>Pix</strong><span>Aprovação na hora, com 5% off nos produtos.</span><small>Pagamento seguro via Mercado Pago</small></label>
-              <label class="pay"><input type="radio" name="pay" value="Cartão de crédito" /><strong>Cartão de crédito</strong><span>Preço cheio, em até 2x sem juros pelo Mercado Pago.</span><small>Pagamento seguro via Mercado Pago</small></label>
+              <label class="pay"><input type="radio" name="pay" value="Cartão de crédito" /><strong>Cartão de crédito</strong><span>Preço cheio, em até 3x sem juros pelo Mercado Pago (2x em compras até R$ 100).</span><small>Pagamento seguro via Mercado Pago</small></label>
             </div>
             <p class="note"><b>Na loja publicada, o pagamento é feito no ambiente seguro do Mercado Pago.</b> Nenhum dado de cartão é pedido aqui.</p>
           </div>
@@ -851,7 +861,7 @@
           },
           moletinho: { name: "Conjunto Moletinho", cat: "Conjuntos", price: 169.99, pix: 161.49, fit: "Veste até o 44", desc: "Conjunto no moletinho, confortável e arrumadinho. Última peça disponível.", stock: { G: 1 } },
           alfaiataria: { name: "Conjunto Alfaiataria", cat: "Conjuntos", price: 149.99, pix: 142.49, fit: "Veste até o 44", desc: "Conjunto na alfaiataria: blusa frente única com amarração nas costas e short.", stock: { G: 1 } },
-          regatas: { name: "Regatas Basiquinhas", cat: "Básicos", price: 39.99, pix: 37.99, stock: { "Único": 2 /* 2 últimas, cores claras; 2ª cor a confirmar */ }, ultima: true, colors: ["Bege"] }
+          regatas: { video: "vid-regatas-basiquinhas.mp4", name: "Regatas Basiquinhas", cat: "Básicos", price: 39.99, pix: 37.99, byColor: true, colors: [{ n: "Off-white", hex: "#EDE8DC" }, { n: "Bege", hex: "#C49A6C" }], stock: { "Off-white": { "Único": 1 }, Bege: { "Único": 1 } /* 2 últimas, 1 de cada cor (25/11) */ }, ultima: true }
         };
 
         /* ============================================================
@@ -862,7 +872,7 @@
            - old: preço "de" (promoção, aparece riscado com o selo de % OFF).
            - ultima: true mostra o selo "Última peça".
            - col: "celebrar" coloca a peça na coleção Celebrar; occ: ocasiões (pode ter mais de uma).
-           O Pix (5% off) e o 2x sem juros são calculados sozinhos.
+           O Pix (5% off) e o parcelamento (2x até R$ 100, 3x acima) são calculados sozinhos.
            ============================================================ */
         var OCC_NATAL = "Ceia de Natal", OCC_CONF = "Confraternização", OCC_REV = "Réveillon";
         var NOVAS = {
@@ -891,7 +901,7 @@
             stock: { "Azul-marinho": { M: 1, G: 1, GG: 1 }, Branca: { M: 1, G: 1, GG: 1 }, Marrom: { M: 1, G: 1, GG: 1 }, Bege: { M: 1, G: 1, GG: 1 }, Preta: { M: 1, G: 1, GG: 1 } /* a confirmar quantidade por cor */ },
             desc: "Saia longa e evasê no tecido Marrant, com bolsos e cintura com passantes. Disponível no M, G e GG, em 5 cores. Nas fotos, a Simone usa o tamanho M.",
             video: "vid-saias-marrant-cores.mp4", video2: "vid-saia-marrant-branca.mp4",
-            photos: [["jac-saia-marrant-marinho-frente.jpg", "Modelo com a saia longa azul-marinho no Marrant e blusa marrom"], ["jac-saia-marrant-marinho-lado.jpg", "Saia longa azul-marinho no Marrant, de lado"], ["jac-saia-marrant-branca-frente.jpg", "Modelo com a saia longa branca no Marrant e blusa preta"], ["jac-saia-marrant-branca-lado.jpg", "Saia longa branca no Marrant, de corpo inteiro"]] },
+            photos: [["jac-saias-marrant-cabide.jpg", "Saias longas no Marrant no cabide, nas cores bege, branca, marrom, preta e azul-marinho"], ["jac-saia-marrant-marinho-frente.jpg", "Modelo com a saia longa azul-marinho no Marrant e blusa marrom"], ["jac-saia-marrant-marinho-lado.jpg", "Saia longa azul-marinho no Marrant, de lado"], ["jac-saia-marrant-branca-frente.jpg", "Modelo com a saia longa branca no Marrant e blusa preta"], ["jac-saia-marrant-branca-lado.jpg", "Saia longa branca no Marrant, de corpo inteiro"]] },
 
           /* --- Vitrine: Vestidos --- */
           vestViscosePreto: { name: "Vestido no viscolinho preto", cat: "Vestidos", price: 109.99, veste: "44", stock: { G: 1 /* a confirmar */ }, photos: [["jac-vestido-viscose-preto.jpg", "Modelo com o vestido preto na viscose"]] },
@@ -976,7 +986,9 @@
         function subtotal() { return cart.reduce(function (s, l) { return s + l.qty * P[l.id].price; }, 0); }
         function pixOff() { return Math.round(cart.reduce(function (s, l) { return s + l.qty * (P[l.id].price - P[l.id].pix); }, 0) * 100) / 100; }
         function half(v) { return Math.floor(Math.round(v * 100) / 2) / 100; }
-        function pixLine(id, q) { return '<span class="pix"><b>' + fmt(P[id].pix * (q || 1)) + ' no Pix</b> (5% off)</span><span class="pix">ou 2x de ' + fmt(half(P[id].price * (q || 1))) + ' sem juros</span>'; }
+        function nParc(v) { return v > 100 ? 3 : 2; }
+        function parc(v) { var n = nParc(v); return n + "x de " + fmt(Math.floor(Math.round(v * 100) / n) / 100); }
+        function pixLine(id, q) { return '<span class="pix"><b>' + fmt(P[id].pix * (q || 1)) + ' no Pix</b> (5% off)</span><span class="pix">ou ' + parc(P[id].price * (q || 1)) + ' sem juros</span>'; }
         function payMode() { var r = document.querySelector('input[name="pay"]:checked'); return r && r.value === "Pix" ? "pix" : "card"; }
         function count() { return cart.reduce(function (s, l) { return s + l.qty; }, 0); }
         function shipObj() { return SHIPS.filter(function (s) { return s.k === ship; })[0] || null; }
@@ -997,10 +1009,18 @@
           b.innerHTML = '<div class="card__ph">' + (badges.length ? '<div class="badges">' + badges.join("") + "</div>" : "") + '<div class="soldout"><span class="label">Esgotado</span></div>' + imgs + "</div>" +
             '<div class="card__body">' + (p.occ ? '<span class="card__occ">' + p.occ.join(" · ") + "</span>" : '<span class="card__cat label">' + p.cat + "</span>") +
             "<h3>" + p.name + '</h3><span class="card__size">' + sizeLine(p) + '</span><span class="price">' + priceHtml(p) + "</span>" +
-            '<span class="pix"><b>' + fmt(p.pix) + ' no Pix</b> (5% off)</span><span class="pix">ou 2x de ' + fmt(half(p.price)) + ' sem juros</span><span class="card__see label">Ver peça</span></div>';
+            '<span class="pix"><b>' + fmt(p.pix) + ' no Pix</b> (5% off)</span><span class="pix">ou ' + parc(p.price) + ' sem juros</span><span class="card__see label">Ver peça</span></div>';
           return b;
         }
         Object.keys(NOVAS).forEach(function (id) { $(P[id].col === "celebrar" ? "celebGrid" : "vitrineGrid").appendChild(makeCard(id)); });
+        /* códigos das peças (os mesmos da planilha). Peça nova: dê o próximo número livre. */
+        var CODES = {"longoVermelho": "P01", "longoAmarelo": "P02", "longoAzul": "P03", "crepeVermelho": "P04", "vestLongoOff": "P05", "vestFluidoMarrom": "P06", "vestViscosePreto": "P07", "chemiseViscose": "P08", "vestViscolycra": "P09", "vestTrespassado": "P10", "tubinhoViscolinho": "P11", "vestViscolycraPreto": "P12", "tubinhoAmarelo": "P13", "chemiseSedinha": "P14", "vestCanelado": "P15", "tubinhoTule": "P16", "moletinho": "P17", "alfaiataria": "P18", "marrantVermelho": "P19", "conjPaete": "P20", "conjMagenta": "P21", "conjViscoseVerde": "P22", "conjColeteBermuda": "P23", "conjColetePantalona": "P24", "conjSaiaOffWhite": "P25", "conjCroppedPantalona": "P26", "conjBermudaCinza": "P27", "saiaMarrant": "P28", "body": "P29", "bodyPaete": "P30", "bodyPromo": "P31", "bodyRendaLonga": "P32", "bodyRendaCurta": "P33", "bodyRendaV": "P34", "camisaListradaM": "P35", "camisaListradaP": "P36", "blusaSedinhaM": "P37", "blusaSedinhaGG": "P38", "bataPoa": "P39", "blusaAssimetrica": "P40", "tshirt": "P41", "blusaMarrom": "P42", "blusaPink": "P43", "shortOffWhite": "P44", "shortMarrom": "P45", "calcaWide": "P46", "calcaLinho": "P47", "calcaBege": "P48", "regatas": "P49", "regataBoreal": "P50", "macacaoCargo": "P51", "macaquinhoPreto": "P52"};
+        Object.keys(CODES).forEach(function (id) { if (P[id]) P[id].cod = CODES[id]; });
+        document.querySelectorAll(".card").forEach(function (c) {
+          var p = P[c.dataset.id]; if (!p || !p.cod) return;
+          var t = document.createElement("span"); t.className = "code"; t.textContent = p.cod; t.setAttribute("aria-label", "Código " + p.cod);
+          c.querySelector(".card__ph").appendChild(t);
+        });
 
         /* overlays */
         var scrim = $("scrim"), modal = $("modal"), drawer = $("drawer"), ck = $("ck");
@@ -1038,9 +1058,9 @@
           var cols = p.byColor ? p.colors.map(cname) : [cur.color];
           for (var i = 0; i < cols.length; i++) { var fs = firstSize(id, cols[i]); if (fs) { cur.color = cols[i]; cur.size = fs; break; } }
           renderPhotos();
-          $("mCat").textContent = p.col === "celebrar" ? "Coleção Celebrar · " + p.cat : p.cat; $("mName").textContent = p.name; $("mPrice").innerHTML = (p.old ? '<s class="old">' + fmt(p.old) + "</s>" : "") + fmt(p.price);
+          $("mCat").textContent = p.col === "celebrar" ? "Coleção Celebrar · " + p.cat : p.cat; $("mName").innerHTML = p.name.replace("&", "&amp;") + (p.cod ? '<span class="modal__code">' + p.cod + "</span>" : ""); $("mPrice").innerHTML = (p.old ? '<s class="old">' + fmt(p.old) + "</s>" : "") + fmt(p.price);
           $("mPix").textContent = fmt(p.pix);
-          $("mInst").innerHTML = "No cartão<br /><b>2x de " + fmt(half(p.price)) + "</b> sem juros";
+          $("mInst").innerHTML = "No cartão<br /><b>" + parc(p.price) + "</b> sem juros";
           $("mDesc").textContent = p.desc || ""; $("mDesc").hidden = !p.desc;
           $("mFit").textContent = p.fit || ""; $("mFit").hidden = !p.fit;
           $("mHint").textContent = "";
@@ -1154,7 +1174,7 @@
         }
 
         /* sacola */
-        function variant(l) { return (l.size === "Único" ? "Tamanho único" : "Tamanho " + l.size) + (l.color ? " · " + l.color : ""); }
+        function variant(l) { return (P[l.id].cod ? P[l.id].cod + " · " : "") + (l.size === "Único" ? "Tamanho único" : "Tamanho " + l.size) + (l.color ? " · " + l.color : ""); }
         function shipsHtml(name) {
           return SHIPS.map(function (s) {
             return '<label class="ship"><input type="radio" name="' + name + '" value="' + s.k + '"' + (ship === s.k ? " checked" : "") + " /><span><b>" + s.name + "</b>" + (s.info ? " · " + s.info : "") + "</span><b>" + (s.price ? fmt(s.price) : "grátis") + "</b></label>";
@@ -1166,8 +1186,8 @@
           if (mode === "pix") h += "<div><span>Desconto Pix (5%)</span><span>− " + fmt(off) + "</span></div>";
           h += "<div><span>Frete</span><span>" + (so ? (so.price ? fmt(so.price) : "grátis") : "—") + "</span></div>";
           h += '<div class="tot"><span>Total' + (mode === "pix" ? " no Pix" : "") + '</span><span class="price">' + fmt(sub - (mode === "pix" ? off : 0) + fr) + "</span></div>";
-          if (!mode) h += '<p class="pix"><b>' + fmt(sub - off + fr) + ' no Pix</b> (5% off nos produtos)</p><p class="pix">ou 2x de ' + fmt(half(sub + fr)) + ' sem juros no cartão</p>';
-          else if (mode === "card") h += '<p class="pix">Preço cheio · até 2x de ' + fmt(half(sub + fr)) + ' sem juros</p>';
+          if (!mode) h += '<p class="pix"><b>' + fmt(sub - off + fr) + ' no Pix</b> (5% off nos produtos)</p><p class="pix">ou ' + parc(sub + fr) + ' sem juros no cartão</p>';
+          else if (mode === "card") h += '<p class="pix">Preço cheio · até ' + parc(sub + fr) + ' sem juros</p>';
           return h;
         }
         function renderBag() {
@@ -1326,6 +1346,14 @@
 
         (function () { var q = new URLSearchParams(location.search), st = q.get("collection_status") || q.get("status") || "";
           if (!q.get("pedido") || q.get("falhou") || st === "rejected" || st === "null") restoreBag(); })();
+        $("codeFind").onsubmit = function (e) {
+          e.preventDefault();
+          var v = $("codeIn").value.toUpperCase().replace(/[^0-9]/g, ""), cod = v ? "P" + ("0" + (+v)).slice(-2) : "", id = null;
+          Object.keys(P).forEach(function (k) { if (P[k].cod === cod) id = k; });
+          if (!id) { $("codeMsg").textContent = v ? "Não achamos a peça " + cod + ". Confira o código." : "Digite o código da peça."; return; }
+          $("codeMsg").textContent = ""; lastFocus = $("codeIn"); openProduct(id);
+        };
+        $("codeIn").oninput = function () { $("codeMsg").textContent = ""; };
         updateCards(); renderBag(); loadStock(); backFromMP();
       })();
     </script>
