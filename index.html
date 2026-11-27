@@ -1331,6 +1331,9 @@
             if (p) {
               if (c.price) { if (p.old && c.price >= p.old) delete p.old; p.price = c.price; p.pix = c.pix; }
               p.stock = c.stock; if (c.cod) p.cod = c.cod;
+              if (c.byColor && c.colors) { p.byColor = true; p.colors = p.colors || []; var tem = p.colors.map(function (x) { return x.n; });
+                c.colors.forEach(function (n) { if (tem.indexOf(n) < 0) p.colors.push({ n: n }); });
+                p.colors = p.colors.filter(function (x) { return c.colors.indexOf(x.n) > -1; }); }
               if (c.desc && !p.desc) p.desc = c.desc;
               card = document.querySelector('.card[data-id="' + id + '"]');
               if (card) { cardPreco(card, p); card.classList.toggle("is-off", c.show === false); if (c.show === false) card.hidden = true; }
