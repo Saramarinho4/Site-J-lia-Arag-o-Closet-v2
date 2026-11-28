@@ -823,6 +823,7 @@
               <label class="s3">CEP<input class="field" id="fCep" inputmode="numeric" placeholder="00000-000" maxlength="9" /></label>
               <label class="s4">Rua<input class="field" id="fRua" /></label>
               <label class="s2">Número<input class="field" id="fNum" /></label>
+              <label class="s2">Complemento<input class="field" id="fComp" placeholder="Apto, casa, bloco" /></label>
               <label class="s4">Bairro<input class="field" id="fBairro" /></label>
               <label class="s4">Cidade<input class="field" id="fCidade" /></label>
               <label class="s2">UF<input class="field" id="fUf" maxlength="2" /></label>
@@ -1281,7 +1282,7 @@
         function need(ids) {
           var bad = null;
           ids.forEach(function (x) { var el = $(x[0]), ok = x[1](el.value.trim()); el.classList.toggle("err", !ok); if (!ok && !bad) bad = el; });
-          if (bad) { $("ckErr").textContent = "Confira os campos destacados."; bad.focus(); return false; }
+          if (bad) { var dica = { fNome: "Escreva seu nome completo (nome e sobrenome).", fCpf: "Confira o CPF, ele é usado na etiqueta de envio.", fWpp: "Escreva o WhatsApp com DDD.", fEmail: "Confira o e-mail." }; $("ckErr").textContent = dica[bad.id] || "Confira os campos destacados."; bad.focus(); return false; }
           return true;
         }
         var filled = function (v) { return v.length > 0; };
@@ -1317,7 +1318,7 @@
             itens: cart.map(function (l) { return { id: l.id, tam: l.size, cor: P[l.id].byColor ? l.color : null, qtd: l.qty }; }),
             frete: ship, pagamento: mode === "pix" ? "pix" : "cartao",
             cliente: { nome: val("fNome"), email: val("fEmail"), whatsapp: val("fWpp"), cpf: ship === "loja" ? "" : digits(val("fCpf")) },
-            endereco: ship === "loja" ? null : { cep: val("fCep"), rua: val("fRua"), numero: val("fNum"), bairro: val("fBairro"), cidade: val("fCidade"), uf: val("fUf").toUpperCase() }
+            endereco: ship === "loja" ? null : { cep: val("fCep"), rua: val("fRua"), numero: val("fNum"), complemento: val("fComp"), bairro: val("fBairro"), cidade: val("fCidade"), uf: val("fUf").toUpperCase() }
           };
           btn.disabled = true; btn.textContent = "Abrindo o Mercado Pago…"; $("ckErr").textContent = "";
           fetch(API.replace(/\/$/, "") + "/checkout", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
