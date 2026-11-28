@@ -196,14 +196,6 @@
       .foot__links .btn--line { color: var(--creme); border-color: rgba(246, 239, 230, 0.5); }
       .foot__links .btn--line:hover { background: var(--creme); color: var(--choco); }
       .foot__info { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 26px; border-top: 1px solid rgba(201, 139, 90, 0.35); padding-top: 30px; font-size: 12px; color: var(--bege); }
-      .trocas { max-width: 620px; margin: 26px auto 0; text-align: left; font-size: 14px; color: var(--bege); }
-      .trocas summary { cursor: pointer; text-align: center; font-family: var(--sans, Montserrat, sans-serif); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--caramelo); list-style: none; }
-      .trocas summary::-webkit-details-marker { display: none; }
-      .trocas summary::after { content: " +"; }
-      .trocas[open] summary::after { content: " −"; }
-      .trocas ul { margin: 16px 0 0; padding-left: 18px; line-height: 1.6; }
-      .trocas li { margin-bottom: 8px; }
-      .trocas b { color: var(--creme); font-weight: 600; }
       .foot__fine { margin-top: 28px; font-size: 12px; color: rgba(232, 217, 197, 0.75); }
       .foot__fine a { color: var(--caramelo); text-decoration: none; }
 
@@ -437,6 +429,13 @@
       .modal__desc { font-size: 14px; line-height: 1.7; padding: 16px 0 6px; border-top: var(--line); }
       .modal__buy { display: flex; gap: 10px; align-items: center; margin-top: 26px; }
       .modal__buy .modal__add { margin-top: 0; flex: 1; }
+      .faq { margin-top: 22px; padding: 18px 20px; border: 1px solid rgba(201, 139, 90, 0.45); border-radius: 14px; background: rgba(232, 217, 197, 0.35); }
+      .faq__t { font-size: 11px; color: var(--laranja-texto); margin-bottom: 10px; }
+      .faq dl { display: grid; gap: 10px; margin: 0; }
+      .faq dt { font-size: 12px; font-weight: 600; color: var(--choco); }
+      .faq dt::before { content: "✦ "; color: var(--laranja-vivo); }
+      .faq dd { margin: 2px 0 0 16px; font-size: 12px; line-height: 1.55; color: var(--choco-2); }
+      .faq a { color: var(--laranja-texto); }
       .modal__perks { list-style: none; margin-top: 22px; padding-top: 18px; border-top: var(--line); display: grid; gap: 10px; font-size: 12px; color: var(--choco-2); }
       .modal__perks li { display: flex; gap: 10px; align-items: center; }
       .modal__perks li::before { content: "✦"; color: var(--laranja-vivo); }
@@ -557,6 +556,7 @@
           <a class="label" href="#novidades">Novidades</a>
           <a class="label" href="#vitrine">Vitrine</a>
           <a class="label" href="#como-comprar">Como comprar</a>
+          <a class="label" href="#trocas">Trocas</a>
           <a class="label" href="#a-loja">A loja</a>
           <a class="label" href="#contato">Contato</a>
         </nav>
@@ -575,6 +575,7 @@
           <a class="label" href="#novidades">Novidades</a>
         <a class="label" href="#vitrine">Vitrine</a>
         <a class="label" href="#como-comprar">Como comprar</a>
+          <a class="label" href="#trocas">Trocas</a>
         <a class="label" href="#a-loja">A loja</a>
         <a class="label" href="#contato">Contato</a>
       </div>
@@ -704,6 +705,22 @@
         </div>
       </section>
 
+      <section class="sec" id="trocas">
+        <div class="wrap">
+          <div class="sec__head fade">
+            <span class="label">Compra tranquila</span>
+            <h2>Trocas e devoluções</h2>
+          </div>
+          <div class="steps">
+            <div class="stp fade"><b>7</b><div><h3>Troca</h3><p>Em até 7 dias depois de receber, uma vez por peça, sem uso e com etiqueta. O frete da troca fica por conta da cliente. Se não tiver o tamanho, vira crédito na loja.</p></div></div>
+            <div class="stp fade"><b>90</b><div><h3>Defeito</h3><p>Até 90 dias pra peças com defeito, com o frete por conta da loja.</p></div></div>
+            <div class="stp fade"><b>7</b><div><h3>Arrependimento</h3><p>Em compra pelo site, você pode desistir em até 7 dias depois de receber, inclusive em promoção.</p></div></div>
+            <div class="stp fade"><b>7</b><div><h3>Reembolso</h3><p>No mesmo meio de pagamento, em até 7 dias depois que a peça voltar pra loja.</p></div></div>
+          </div>
+          <p class="help fade">Prazos em dias corridos. Pra trocar ou devolver, <a href="https://wa.me/5562994877575" target="_blank" rel="noopener">chame a loja no WhatsApp</a> com o número do pedido.</p>
+        </div>
+      </section>
+
       <section class="sec vipsec">
         <div class="wrap">
           <div class="vip fade">
@@ -759,17 +776,7 @@
           <span>Frete: Melhor Envio</span>
           <span>Loja: Setor Monte Azul, Senador Canedo - GO</span>
         </div>
-        <details class="trocas" id="trocas">
-          <summary>Trocas e devoluções</summary>
-          <ul>
-            <li><b>Troca:</b> em até 7 dias depois de receber, uma vez por peça, sem uso e com etiqueta. O frete da troca fica por conta da cliente. Se não tiver o tamanho, vira crédito na loja.</li>
-            <li><b>Defeito:</b> até 90 dias, com o frete por conta da loja.</li>
-            <li><b>Arrependimento:</b> em compra pelo site, você pode desistir em até 7 dias depois de receber, inclusive em promoção.</li>
-            <li><b>Reembolso:</b> no mesmo meio de pagamento, em até 7 dias depois que a peça voltar para a loja.</li>
-            <li>Pra trocar ou devolver, é só chamar a loja no WhatsApp com o número do pedido.</li>
-          </ul>
-        </details>
-        <p class="foot__fine">© 2026 Júlia Aragão Closet · CNPJ 42.683.801/0001-49<br />Site desenvolvido por Astera ✦</p>
+        <p class="foot__fine">© 2026 Júlia Aragão Closet · CNPJ 42.683.801/0001-49<br /><a href="#trocas">Trocas e devoluções</a> · Site desenvolvido por Astera ✦</p>
       </div>
     </footer>
 
@@ -797,12 +804,16 @@
             <button class="btn modal__add" id="mAdd">Adicionar à sacola</button>
           </div>
           <p class="modal__hint" id="mHint"></p>
-          <ul class="modal__perks">
-            <li>Envio pra todo o Brasil, com PAC ou SEDEX</li>
-            <li>Pix com 5% off ou até 3x sem juros no cartão (2x em compras até R$ 100)</li>
-            <li>Pagamento seguro pelo Mercado Pago</li>
-            <li><a href="https://wa.me/5562994877575" target="_blank" rel="noopener">Dúvida sobre o tamanho? Fale no WhatsApp</a></li>
-          </ul>
+          <div class="faq">
+            <p class="label faq__t">Dúvidas frequentes</p>
+            <dl>
+              <dt>Frete e prazo</dt><dd>PAC em 6 a 9 dias úteis (R$ 22,90) ou SEDEX em 2 a 4 dias úteis (R$ 38,50). É só colocar o CEP na sacola.</dd>
+              <dt>Pagamento</dt><dd>Pix com 5% off ou até 3x sem juros no cartão (2x em compras até R$ 100), seguro pelo Mercado Pago.</dd>
+              <dt>Retirada na loja</dt><dd>Grátis, no Setor Monte Azul, Senador Canedo - GO. Você paga no site e combina o horário pelo WhatsApp.</dd>
+              <dt>Trocas</dt><dd>Até 7 dias depois de receber, sem uso e com etiqueta. <a href="#trocas" data-close>Ver a política completa</a></dd>
+              <dt>Tamanho</dt><dd>Ficou na dúvida? <a href="https://wa.me/5562994877575" target="_blank" rel="noopener">Fale com a loja no WhatsApp</a></dd>
+            </dl>
+          </div>
         </div>
       </div>
     </div>
