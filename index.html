@@ -265,6 +265,10 @@
       .ship input { accent-color: var(--laranja); width: 16px; height: 16px; }
       .ship span { flex: 1; }
       .ship b { font-weight: 500; }
+      .retira { margin-top: 14px; border: 1.5px solid rgba(238, 106, 18, 0.35); border-radius: 18px; padding: 14px 16px; background: #fff4ea; }
+      .retira .ship { border: 0; padding: 0; background: transparent; }
+      .retira p { font-size: 12.5px; color: var(--choco-2); margin: 8px 0 10px 28px; }
+      .retira .btn { margin-left: 28px; min-height: 40px; padding: 0 16px; font-size: 12px; }
       .err-msg { color: #b3261e; font-size: 12px; margin-top: 6px; }
       .sums { margin: 6px 0 18px; font-size: 13px; }
       .sums div { display: flex; justify-content: space-between; padding: 5px 0; }
@@ -812,7 +816,8 @@
           <div data-step="2" hidden>
             <h2>Entrega</h2>
             <div id="addrForm" class="form">
-              <label class="s2">CEP<input class="field" id="fCep" inputmode="numeric" /></label>
+              <label class="s3">CPF <small style="text-transform:none;letter-spacing:0;opacity:.7">(para a etiqueta de envio)</small><input class="field" id="fCpf" inputmode="numeric" placeholder="000.000.000-00" maxlength="14" autocomplete="off" /></label>
+              <label class="s3">CEP<input class="field" id="fCep" inputmode="numeric" placeholder="00000-000" maxlength="9" /></label>
               <label class="s4">Rua<input class="field" id="fRua" /></label>
               <label class="s2">Número<input class="field" id="fNum" /></label>
               <label class="s4">Bairro<input class="field" id="fBairro" /></label>
@@ -898,8 +903,8 @@
 
           saiaMarrant: { name: "Saia longa no Marrant", cat: "Saias", price: 149.99, col: "celebrar", occ: [OCC_NATAL, OCC_CONF, OCC_REV], byColor: true,
             colors: [{ n: "Azul-marinho", hex: "#1F2A4D" }, { n: "Branca", hex: "#F4F1EA" }, { n: "Marrom", hex: "#4A2A1E" }, { n: "Bege", hex: "#D6BC9C" }, { n: "Preta", hex: "#1E1A18" }],
-            stock: { "Azul-marinho": { M: 1, G: 1, GG: 1 }, Branca: { M: 1, G: 1, GG: 1 }, Marrom: { M: 1, G: 1, GG: 1 }, Bege: { M: 1, G: 1, GG: 1 }, Preta: { M: 1, G: 1, GG: 1 } /* a confirmar quantidade por cor */ },
-            desc: "Saia longa e evasê no tecido Marrant, com bolsos e cintura com passantes. Disponível no M, G e GG, em 5 cores. Nas fotos, a Simone usa o tamanho M.",
+            stock: { "Azul-marinho": { M: 1 }, Branca: { M: 1 }, Marrom: { G: 1 }, Bege: { G: 1 }, Preta: { G: 1, GG: 1 } /* 28/11: tamanhos por cor */ },
+            desc: "Saia longa e evasê no tecido Marrant, com bolsos e cintura com passantes. Tamanhos por cor: preta G e GG, marrom G, bege G, azul-marinho M e branca M. Nas fotos, a Simone usa o tamanho M.",
             video: "vid-saias-marrant-cores.mp4", video2: "vid-saia-marrant-branca.mp4",
             photos: [["jac-saias-marrant-cabide.jpg", "Saias longas no Marrant no cabide, nas cores bege, branca, marrom, preta e azul-marinho"], ["jac-saia-marrant-marinho-frente.jpg", "Modelo com a saia longa azul-marinho no Marrant e blusa marrom"], ["jac-saia-marrant-marinho-lado.jpg", "Saia longa azul-marinho no Marrant, de lado"], ["jac-saia-marrant-branca-frente.jpg", "Modelo com a saia longa branca no Marrant e blusa preta"], ["jac-saia-marrant-branca-lado.jpg", "Saia longa branca no Marrant, de corpo inteiro"]] },
 
@@ -969,8 +974,12 @@
         var API = "https://julia-pagamento.suport0astera-store.workers.dev";
         var SHIPS = [
           { k: "pac", name: "PAC", info: "6 a 9 dias úteis", price: 22.9 },
-          { k: "sedex", name: "SEDEX", info: "2 a 4 dias úteis", price: 38.5 }
+          { k: "sedex", name: "SEDEX", info: "2 a 4 dias úteis", price: 38.5 },
+          { k: "loja", name: "Retirar na loja", info: "horário combinado pelo WhatsApp", price: 0 }
         ];
+        var WA_LOJA = "5562994877575";
+        function waRetirada(ref) { return "https://wa.me/" + WA_LOJA + "?text=" + encodeURIComponent("Oi! Fiz um pedido no site" + (ref ? " (" + ref + ")" : "") + " e quero retirar na loja. Qual horário fica bom?"); }
+        function cpfOk(v) { var d = digits(v); if (d.length !== 11 || /^(\d)\1{10}$/.test(d)) return false; for (var t = 9; t < 11; t++) { var s = 0; for (var i = 0; i < t; i++) s += +d[i] * (t + 1 - i); if (((s * 10) % 11) % 10 !== +d[t]) return false; } return true; }
         var cart = [], cep = "", ship = null, step = 1, cur = null, lastFocus = null;
         var $ = function (id) { return document.getElementById(id); };
         var fmt = function (v) { return "R$ " + v.toFixed(2).replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, "."); };
@@ -995,7 +1004,7 @@
 
 
         /* cards das peças novas (gerados a partir dos dados) */
-        function sizeLine(p) { var st = p.byColor ? p.stock[Object.keys(p.stock)[0]] : p.stock, ks = Object.keys(st), k = ks.length > 1 && !p.byColor ? ks.join("/") : ks[0], u = k === "Único"; return (u ? "Tamanho único" : "Tam. " + k) + (p.veste ? " · veste " + (u ? "até o " : "") + p.veste : ""); }
+        function sizeLine(p) { var ks = []; (p.byColor ? Object.keys(p.stock).map(function (c) { return p.stock[c]; }) : [p.stock]).forEach(function (m) { Object.keys(m || {}).forEach(function (t) { if (ks.indexOf(t) < 0) ks.push(t); }); }); if (!ks.length) ks = ["Único"]; var k = ks.length > 1 ? ks.join("/") : ks[0], u = k === "Único"; return (u ? "Tamanho único" : "Tam. " + k) + (p.veste ? " · veste " + (u ? "até o " : "") + p.veste : ""); }
         function priceHtml(p) { return (p.old ? '<s class="old">' + fmt(p.old) + "</s>" : "") + fmt(p.price); }
         function makeCard(id) {
           var p = P[id], b = document.createElement("button"), badges = [];
@@ -1175,8 +1184,8 @@
 
         /* sacola */
         function variant(l) { return (P[l.id].cod ? P[l.id].cod + " · " : "") + (l.size === "Único" ? "Tamanho único" : "Tamanho " + l.size) + (l.color ? " · " + l.color : ""); }
-        function shipsHtml(name) {
-          return SHIPS.map(function (s) {
+        function shipsHtml(name, semLoja) {
+          return SHIPS.filter(function (s) { return !(semLoja && s.k === "loja"); }).map(function (s) {
             return '<label class="ship"><input type="radio" name="' + name + '" value="' + s.k + '"' + (ship === s.k ? " checked" : "") + " /><span><b>" + s.name + "</b>" + (s.info ? " · " + s.info : "") + "</span><b>" + (s.price ? fmt(s.price) : "grátis") + "</b></label>";
           }).join("");
         }
@@ -1212,13 +1221,19 @@
           });
           var fr = document.createElement("div");
           fr.className = "frete";
-          fr.innerHTML = '<label class="label" for="cepIn">Calcular frete</label><div class="cepbox"><input class="field" id="cepIn" inputmode="numeric" placeholder="00000-000" maxlength="9" value="' + cep + '" /><button class="btn btn--line" id="cepBtn">Calcular</button></div><p class="err-msg" id="cepErr"></p>' + (cep ? '<p class="label" style="font-size:12px;margin-top:16px;color:var(--caramelo-ink)">Opções via Melhor Envio</p><div class="ships">' + shipsHtml("shipBag") + "</div>" : "");
+          fr.innerHTML = '<label class="label" for="cepIn">Calcular frete</label><div class="cepbox"><input class="field" id="cepIn" inputmode="numeric" placeholder="00000-000" maxlength="9" value="' + cep + '" /><button class="btn btn--line" id="cepBtn">Calcular</button></div><p class="err-msg" id="cepErr"></p>' + (cep ? '<p class="label" style="font-size:12px;margin-top:16px;color:var(--caramelo-ink)">Opções via Melhor Envio</p><div class="ships">' + shipsHtml("shipBag", true) + "</div>" : "") +
+            '<div class="retira"><label class="ship"><input type="radio" name="shipBag" value="loja"' + (ship === "loja" ? " checked" : "") + ' /><span><b>Retirar na loja</b></span><b>grátis</b></label><p>Os horários de retirada precisam ser combinados com a loja pelo WhatsApp.</p><a class="btn btn--line" href="' + waRetirada() + '" target="_blank" rel="noopener">Combinar no WhatsApp</a></div>';
           body.appendChild(fr);
           var ci = $("cepIn");
-          ci.oninput = function () { var d = digits(ci.value).slice(0, 8); ci.value = d.length > 5 ? d.slice(0, 5) + "-" + d.slice(5) : d; };
           var calc = function () {
             if (digits(ci.value).length !== 8) { $("cepErr").textContent = "Digite um CEP com 8 números."; ci.classList.add("err"); return; }
-            cep = ci.value; saveBag(); renderBag();
+            cep = ci.value; saveBag(); renderBag(); var n = $("cepIn"); if (n) { n.focus(); n.setSelectionRange(n.value.length, n.value.length); }
+          };
+          ci.oninput = function () {
+            var d = digits(ci.value).slice(0, 8); ci.value = d.length > 5 ? d.slice(0, 5) + "-" + d.slice(5) : d;
+            ci.classList.remove("err"); $("cepErr").textContent = "";
+            if (d.length === 8 && ci.value !== cep) calc();
+            else if (d.length < 8 && cep) { cep = ""; if (ship !== "loja") ship = null; saveBag(); renderBag(); var n = $("cepIn"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); }
           };
           $("cepBtn").onclick = calc;
           ci.onkeydown = function (e) { if (e.key === "Enter") calc(); };
@@ -1227,9 +1242,9 @@
         }
         $("goCheckout").onclick = function () {
           if (!cart.length) return;
-          if (!ship) { $("bagErr").textContent = "Calcule o frete pelo CEP e escolha uma opção."; var c = $("cepIn"); if (c) c.focus(); return; }
+          if (!ship) { $("bagErr").textContent = "Calcule o frete pelo CEP ou escolha retirar na loja."; var c = $("cepIn"); if (c) c.focus(); return; }
           drawer.classList.remove("on"); drawer.setAttribute("aria-hidden", "true"); scrim.classList.add("on");
-          if (cep && !$("fCep").value) $("fCep").value = cep;
+          if (cep && digits(cep) !== digits($("fCep").value)) { $("fCep").value = cep; buscaCep(); }
           step = 1; $("ckFlow").hidden = false; $("ckOk").hidden = true;
           ck.classList.add("on"); ck.scrollTop = 0; lock(); renderCk(); $("fNome").focus();
         };
@@ -1250,7 +1265,7 @@
           $("ckNext").textContent = step === 3 ? "Pagar com Mercado Pago" : "Continuar";
           $("ckErr").textContent = "";
           $("addrForm").hidden = ship === "loja";
-          $("ckShips").innerHTML = shipsHtml("shipCk") + (ship === "loja" ? '<p class="note" style="margin-top:6px">Retire sua sacola na loja. A gente avisa pelo WhatsApp quando estiver pronta.</p>' : "");
+          $("ckShips").innerHTML = shipsHtml("shipCk") + (ship === "loja" ? '<p class="note" style="margin-top:6px">Os horários de retirada precisam ser combinados com a loja pelo WhatsApp. Depois do pagamento, é só tocar em "Combinar retirada" que a conversa abre com o número do pedido.</p>' : "");
           $("ckShips").querySelectorAll("input").forEach(function (r) { r.onchange = function () { ship = r.value; renderCk(); }; });
           $("ckItems").innerHTML = summaryHtml(cart); fillThumbs($("ckItems"));
           $("ckTgN").textContent = count() + (count() > 1 ? " peças" : " peça");
@@ -1264,11 +1279,26 @@
           return true;
         }
         var filled = function (v) { return v.length > 0; };
-        $("fCep").oninput = function () { var d = digits(this.value).slice(0, 8); this.value = d.length > 5 ? d.slice(0, 5) + "-" + d.slice(5) : d; };
+        var cepAuto = "";
+        function limpaEnd() { ["fRua", "fBairro", "fCidade", "fUf"].forEach(function (k) { $(k).value = ""; }); cepAuto = ""; }
+        function buscaCep() {
+          var d = digits($("fCep").value);
+          if (d.length !== 8) { if (cepAuto) limpaEnd(); return; }
+          if (d === cepAuto) return;
+          fetch("https://viacep.com.br/ws/" + d + "/json/").then(function (r) { return r.json(); }).then(function (x) {
+            if (digits($("fCep").value) !== d) return;
+            if (x.erro) { limpaEnd(); $("fCep").classList.add("err"); $("ckErr").textContent = "CEP não encontrado. Confira os números."; return; }
+            $("fRua").value = x.logradouro || ""; $("fBairro").value = x.bairro || ""; $("fCidade").value = x.localidade || ""; $("fUf").value = x.uf || "";
+            cepAuto = d; $("fCep").classList.remove("err"); $("ckErr").textContent = "";
+            if (ck.classList.contains("on")) $(x.logradouro ? "fNum" : "fRua").focus();
+          }).catch(function () {});
+        }
+        $("fCep").oninput = function () { var d = digits(this.value).slice(0, 8); this.value = d.length > 5 ? d.slice(0, 5) + "-" + d.slice(5) : d; if (d.length === 8) { cep = this.value; saveBag(); } buscaCep(); };
+        $("fCpf").oninput = function () { var d = digits(this.value).slice(0, 11); this.value = d.replace(/^(\d{3})(\d)/, "$1.$2").replace(/^(\d{3})\.(\d{3})(\d)/, "$1.$2.$3").replace(/\.(\d{3})(\d{1,2})$/, ".$1-$2"); this.classList.remove("err"); };
         $("ckBack").onclick = function () { if (step > 1) { step--; renderCk(); ck.scrollTop = 0; } else { closeCk(); openDrawer(); } };
         $("ckNext").onclick = function () {
           if (step === 1 && !need([["fNome", filled], ["fEmail", function (v) { return /^\S+@\S+\.\S+$/.test(v); }], ["fWpp", function (v) { return digits(v).length >= 10; }]])) return;
-          if (step === 2 && ship !== "loja" && !need([["fCep", function (v) { return digits(v).length === 8; }], ["fRua", filled], ["fNum", filled], ["fBairro", filled], ["fCidade", filled], ["fUf", function (v) { return /^[A-Za-z]{2}$/.test(v); }]])) return;
+          if (step === 2 && ship !== "loja" && !need([["fCpf", cpfOk], ["fCep", function (v) { return digits(v).length === 8; }], ["fRua", filled], ["fNum", filled], ["fBairro", filled], ["fCidade", filled], ["fUf", function (v) { return /^[A-Za-z]{2}$/.test(v); }]])) return;
           if (step < 3) { step++; renderCk(); ck.scrollTop = 0; return; }
           finish();
         };
@@ -1280,8 +1310,8 @@
           var body = {
             itens: cart.map(function (l) { return { id: l.id, tam: l.size, cor: P[l.id].byColor ? l.color : null, qtd: l.qty }; }),
             frete: ship, pagamento: mode === "pix" ? "pix" : "cartao",
-            cliente: { nome: val("fNome"), email: val("fEmail"), whatsapp: val("fWpp") },
-            endereco: { cep: val("fCep"), rua: val("fRua"), numero: val("fNum"), bairro: val("fBairro"), cidade: val("fCidade"), uf: val("fUf").toUpperCase() }
+            cliente: { nome: val("fNome"), email: val("fEmail"), whatsapp: val("fWpp"), cpf: ship === "loja" ? "" : digits(val("fCpf")) },
+            endereco: ship === "loja" ? null : { cep: val("fCep"), rua: val("fRua"), numero: val("fNum"), bairro: val("fBairro"), cidade: val("fCidade"), uf: val("fUf").toUpperCase() }
           };
           btn.disabled = true; btn.textContent = "Abrindo o Mercado Pago…"; $("ckErr").textContent = "";
           fetch(API.replace(/\/$/, "") + "/checkout", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
@@ -1293,7 +1323,7 @@
                 if (x.d && x.d.esgotado) loadStock();
                 return;
               }
-              try { localStorage.setItem("jac_pedido", JSON.stringify({ ref: x.d.ref, html: okHtml })); } catch (e) {}
+              try { localStorage.setItem("jac_pedido", JSON.stringify({ ref: x.d.ref, html: okHtml, loja: ship === "loja" })); } catch (e) {}
               location.href = x.d.link;
             })
             .catch(function () { btn.disabled = false; btn.textContent = "Pagar com Mercado Pago"; $("ckErr").textContent = "Sem conexão com o pagamento. Confira a internet e tente de novo."; });
@@ -1377,6 +1407,8 @@
           ok.querySelector("h2").innerHTML = falhou ? "Ops, o pagamento não foi aprovado" : (st === "approved" ? "Pedido confirmado" : "Pedido recebido") + ' <span style="color:var(--laranja)">✦</span>';
           $("okNum").textContent = "#" + ref;
           $("okMsg").textContent = falhou ? "Nenhum valor foi cobrado. Você pode montar a sacola de novo e tentar outra forma de pagamento." : st === "approved" ? "O comprovante do Mercado Pago chega no seu e-mail, e a loja fala com você no WhatsApp pra combinar o envio." : "Assim que o pagamento for confirmado, a loja fala com você no WhatsApp pra combinar o envio.";
+          var loja = saved && saved.ref === ref && saved.loja;
+          if (!falhou && loja) $("okMsg").innerHTML = 'Agora é só combinar o horário da retirada com a loja pelo WhatsApp.<br /><a class="btn" style="margin-top:14px" href="' + waRetirada(ref) + '" target="_blank" rel="noopener">Combinar retirada no WhatsApp</a>';
           $("okSum").innerHTML = saved && saved.ref === ref && !falhou ? saved.html : "";
           fillThumbs($("okSum"));
           if (!falhou) { try { localStorage.removeItem("jac_pedido"); } catch (e) {} cart = []; ship = null; cep = ""; updateCount(); renderBag(); }
