@@ -983,7 +983,8 @@
         var WA_LOJA = "5562994877575";
         function nomeOk(v) { return /\S{2,}\s+\S{2,}/.test((v || "").trim()); }
         function celOk(v) { var d = digits(v); return d.length === 11 || d.length === 10; }
-        function waRetirada(ref, nome, cel) { var pecas = ref ? "" : cart.map(function (l) { return "• " + l.qty + "x " + (P[l.id].cod ? P[l.id].cod + " " : "") + P[l.id].name + " (" + variant(l).replace(/^P\d+ · /, "") + ")"; }).join("\n"); return "https://wa.me/" + WA_LOJA + "?text=" + encodeURIComponent((ref ? "Oi! Fiz o pedido " + ref + " no site e quero retirar na loja." : "Oi! Quero retirar na loja estas peças do site:\n" + pecas) + "\n\nNome: " + nome + "\nCelular: " + cel + "\n\nQual horário fica bom pra retirada?"); }
+        function pecasTxt() { return cart.map(function (l) { return "• " + l.qty + "x " + (P[l.id].cod ? P[l.id].cod + " " : "") + P[l.id].name + " (" + variant(l).replace(/^P\d+ · /, "") + ")"; }).join("\n"); }
+        function waRetirada(ref, nome, cel, pecas) { return "https://wa.me/" + WA_LOJA + "?text=" + encodeURIComponent("Oi! Paguei o pedido " + ref + " no site e vou retirar na loja." + (pecas ? "\n\nPeças:\n" + pecas : "") + "\n\nNome: " + nome + "\nCelular: " + cel + "\n\nQual horário fica bom pra retirada?"); }
         function cpfOk(v) { var d = digits(v); if (d.length !== 11 || /^(\d)\1{10}$/.test(d)) return false; for (var t = 9; t < 11; t++) { var s = 0; for (var i = 0; i < t; i++) s += +d[i] * (t + 1 - i); if (((s * 10) % 11) % 10 !== +d[t]) return false; } return true; }
         var cart = [], cep = "", ship = null, step = 1, cur = null, lastFocus = null;
         var $ = function (id) { return document.getElementById(id); };
@@ -1227,7 +1228,7 @@
           var fr = document.createElement("div");
           fr.className = "frete";
           fr.innerHTML = '<label class="label" for="cepIn">Calcular frete</label><div class="cepbox"><input class="field" id="cepIn" inputmode="numeric" placeholder="00000-000" maxlength="9" value="' + cep + '" /><button class="btn btn--line" id="cepBtn">Calcular</button></div><p class="err-msg" id="cepErr"></p>' + (cep ? '<p class="label" style="font-size:12px;margin-top:16px;color:var(--caramelo-ink)">Opções via Melhor Envio</p><div class="ships">' + shipsHtml("shipBag", true) + "</div>" : "") +
-            '<div class="retira"><label class="ship"><input type="radio" name="shipBag" value="loja"' + (ship === "loja" ? " checked" : "") + ' /><span><b>Retirar na loja</b></span><b>grátis</b></label><p>Os horários de retirada precisam ser combinados com a loja pelo WhatsApp.</p><div class="rt-form"><input class="field" id="rtNome" autocomplete="name" placeholder="Nome completo" value="' + ($("fNome").value || "").replace(/"/g, "&quot;") + '" /><input class="field" id="rtCel" inputmode="tel" autocomplete="tel" placeholder="Celular com DDD" value="' + ($("fWpp").value || "").replace(/"/g, "&quot;") + '" /><p class="err-msg" id="rtErr"></p><button class="btn btn--line" id="rtGo" type="button">Combinar no WhatsApp</button></div></div>';
+            '<div class="retira"><label class="ship"><input type="radio" name="shipBag" value="loja"' + (ship === "loja" ? " checked" : "") + ' /><span><b>Retirar na loja</b></span><b>grátis</b></label><p>Pagamento antes, pelo site. Depois de pagar, o WhatsApp da loja abre sozinho pra combinar o horário da retirada.</p></div>';
           body.appendChild(fr);
           var ci = $("cepIn");
           var calc = function () {
@@ -1241,15 +1242,6 @@
             else if (d.length < 8 && cep) { cep = ""; if (ship !== "loja") ship = null; saveBag(); renderBag(); var n = $("cepIn"); n.focus(); n.setSelectionRange(n.value.length, n.value.length); }
           };
           $("cepBtn").onclick = calc;
-          $("rtCel").oninput = function () { var d = digits(this.value).slice(0, 11); this.value = d.length > 2 ? "(" + d.slice(0, 2) + ") " + (d.length > 6 ? d.slice(2, d.length - 4) + "-" + d.slice(-4) : d.slice(2)) : d; this.classList.remove("err"); };
-          $("rtNome").oninput = function () { this.classList.remove("err"); };
-          $("rtGo").onclick = function () {
-            var n = $("rtNome"), c = $("rtCel"), okN = nomeOk(n.value), okC = celOk(c.value);
-            n.classList.toggle("err", !okN); c.classList.toggle("err", !okC);
-            if (!okN || !okC) { $("rtErr").textContent = !okN ? "Escreva seu nome completo (nome e sobrenome)." : "Escreva seu celular com DDD."; (okN ? c : n).focus(); return; }
-            $("rtErr").textContent = ""; $("fNome").value = n.value.trim(); $("fWpp").value = c.value.trim();
-            ship = "loja"; saveBag(); window.open(waRetirada(null, n.value.trim(), c.value.trim()), "_blank", "noopener"); renderBag();
-          };
           ci.onkeydown = function (e) { if (e.key === "Enter") calc(); };
           fr.querySelectorAll('input[name="shipBag"]').forEach(function (r) { r.onchange = function () { ship = r.value; saveBag(); $("bagSums").innerHTML = sumsHtml(); $("bagErr") && ($("bagErr").textContent = ""); }; });
           $("bagSums").innerHTML = sumsHtml() + '<p class="err-msg" id="bagErr"></p>';
@@ -1279,7 +1271,7 @@
           $("ckNext").textContent = step === 3 ? "Pagar com Mercado Pago" : "Continuar";
           $("ckErr").textContent = "";
           $("addrForm").hidden = ship === "loja";
-          $("ckShips").innerHTML = shipsHtml("shipCk") + (ship === "loja" ? '<p class="note" style="margin-top:6px">Os horários de retirada precisam ser combinados com a loja pelo WhatsApp. Depois do pagamento, é só tocar em "Combinar retirada" que a conversa abre com o número do pedido.</p>' : "");
+          $("ckShips").innerHTML = shipsHtml("shipCk") + (ship === "loja" ? '<p class="note" style="margin-top:6px">O horário da retirada é combinado com a loja pelo WhatsApp. Assim que o pagamento for aprovado, a conversa abre sozinha com o número do pedido.</p>' : "");
           $("ckShips").querySelectorAll("input").forEach(function (r) { r.onchange = function () { ship = r.value; renderCk(); }; });
           $("ckItems").innerHTML = summaryHtml(cart); fillThumbs($("ckItems"));
           $("ckTgN").textContent = count() + (count() > 1 ? " peças" : " peça");
@@ -1337,7 +1329,7 @@
                 if (x.d && x.d.esgotado) loadStock();
                 return;
               }
-              try { localStorage.setItem("jac_pedido", JSON.stringify({ ref: x.d.ref, html: okHtml, loja: ship === "loja", nome: val("fNome"), cel: val("fWpp") })); } catch (e) {}
+              try { localStorage.setItem("jac_pedido", JSON.stringify({ ref: x.d.ref, html: okHtml, loja: ship === "loja", nome: val("fNome"), cel: val("fWpp"), pecas: pecasTxt() })); } catch (e) {}
               location.href = x.d.link;
             })
             .catch(function () { btn.disabled = false; btn.textContent = "Pagar com Mercado Pago"; $("ckErr").textContent = "Sem conexão com o pagamento. Confira a internet e tente de novo."; });
@@ -1422,7 +1414,11 @@
           $("okNum").textContent = "#" + ref;
           $("okMsg").textContent = falhou ? "Nenhum valor foi cobrado. Você pode montar a sacola de novo e tentar outra forma de pagamento." : st === "approved" ? "O comprovante do Mercado Pago chega no seu e-mail, e a loja fala com você no WhatsApp pra combinar o envio." : "Assim que o pagamento for confirmado, a loja fala com você no WhatsApp pra combinar o envio.";
           var loja = saved && saved.ref === ref && saved.loja;
-          if (!falhou && loja) $("okMsg").innerHTML = 'Agora é só combinar o horário da retirada com a loja pelo WhatsApp.<br /><a class="btn" style="margin-top:14px" href="' + waRetirada(ref, saved.nome || "", saved.cel || "") + '" target="_blank" rel="noopener">Combinar retirada no WhatsApp</a>';
+          if (!falhou && loja) {
+            var wl = waRetirada(ref, saved.nome || "", saved.cel || "", saved.pecas || "");
+            $("okMsg").innerHTML = st === "approved" ? 'Pagamento aprovado! Abrindo o WhatsApp da loja pra combinar o horário da retirada…<br /><a class="btn" style="margin-top:14px" href="' + wl + '">Abrir o WhatsApp</a>' : 'Assim que o pagamento for aprovado, combine o horário da retirada com a loja pelo WhatsApp.<br /><a class="btn" style="margin-top:14px" href="' + wl + '">Combinar retirada no WhatsApp</a>';
+            if (st === "approved") setTimeout(function () { location.href = wl; }, 2500);
+          }
           $("okSum").innerHTML = saved && saved.ref === ref && !falhou ? saved.html : "";
           fillThumbs($("okSum"));
           if (!falhou) { try { localStorage.removeItem("jac_pedido"); } catch (e) {} cart = []; ship = null; cep = ""; updateCount(); renderBag(); }
