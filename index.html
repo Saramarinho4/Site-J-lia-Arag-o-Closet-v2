@@ -196,6 +196,14 @@
       .foot__links .btn--line { color: var(--creme); border-color: rgba(246, 239, 230, 0.5); }
       .foot__links .btn--line:hover { background: var(--creme); color: var(--choco); }
       .foot__info { display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 26px; border-top: 1px solid rgba(201, 139, 90, 0.35); padding-top: 30px; font-size: 12px; color: var(--bege); }
+      .trocas { max-width: 620px; margin: 26px auto 0; text-align: left; font-size: 14px; color: var(--bege); }
+      .trocas summary { cursor: pointer; text-align: center; font-family: var(--sans, Montserrat, sans-serif); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--caramelo); list-style: none; }
+      .trocas summary::-webkit-details-marker { display: none; }
+      .trocas summary::after { content: " +"; }
+      .trocas[open] summary::after { content: " −"; }
+      .trocas ul { margin: 16px 0 0; padding-left: 18px; line-height: 1.6; }
+      .trocas li { margin-bottom: 8px; }
+      .trocas b { color: var(--creme); font-weight: 600; }
       .foot__fine { margin-top: 28px; font-size: 12px; color: rgba(232, 217, 197, 0.75); }
       .foot__fine a { color: var(--caramelo); text-decoration: none; }
 
@@ -749,7 +757,18 @@
         <div class="foot__info label">
           <span>Pagamento: Pix · Cartão · Mercado Pago</span>
           <span>Frete: Melhor Envio</span>
+          <span>Loja: Setor Monte Azul, Senador Canedo - GO</span>
         </div>
+        <details class="trocas" id="trocas">
+          <summary>Trocas e devoluções</summary>
+          <ul>
+            <li><b>Troca:</b> em até 7 dias depois de receber, uma vez por peça, sem uso e com etiqueta. O frete da troca fica por conta da cliente. Se não tiver o tamanho, vira crédito na loja.</li>
+            <li><b>Defeito:</b> até 90 dias, com o frete por conta da loja.</li>
+            <li><b>Arrependimento:</b> em compra pelo site, você pode desistir em até 7 dias depois de receber, inclusive em promoção.</li>
+            <li><b>Reembolso:</b> no mesmo meio de pagamento, em até 7 dias depois que a peça voltar para a loja.</li>
+            <li>Pra trocar ou devolver, é só chamar a loja no WhatsApp com o número do pedido.</li>
+          </ul>
+        </details>
         <p class="foot__fine">© 2026 Júlia Aragão Closet · CNPJ 42.683.801/0001-49<br />Site desenvolvido por Astera ✦</p>
       </div>
     </footer>
@@ -1229,7 +1248,7 @@
           var fr = document.createElement("div");
           fr.className = "frete";
           fr.innerHTML = '<label class="label" for="cepIn">Calcular frete</label><div class="cepbox"><input class="field" id="cepIn" inputmode="numeric" placeholder="00000-000" maxlength="9" value="' + cep + '" /><button class="btn btn--line" id="cepBtn">Calcular</button></div><p class="err-msg" id="cepErr"></p>' + (cep ? '<p class="label" style="font-size:12px;margin-top:16px;color:var(--caramelo-ink)">Opções via Melhor Envio</p><div class="ships">' + shipsHtml("shipBag", true) + "</div>" : "") +
-            '<div class="retira"><label class="ship"><input type="radio" name="shipBag" value="loja"' + (ship === "loja" ? " checked" : "") + ' /><span><b>Retirar na loja</b></span><b>grátis</b></label><p>Pagamento antes, pelo site. Depois de pagar, o WhatsApp da loja abre sozinho pra combinar o horário da retirada.</p></div>';
+            '<div class="retira"><label class="ship"><input type="radio" name="shipBag" value="loja"' + (ship === "loja" ? " checked" : "") + ' /><span><b>Retirar na loja</b></span><b>grátis</b></label><p>Loja no Setor Monte Azul, Senador Canedo - GO. Pagamento antes, pelo site. Depois de pagar, o WhatsApp da loja abre sozinho pra combinar o horário, e o endereço completo vai por lá.</p></div>';
           body.appendChild(fr);
           var ci = $("cepIn");
           var calc = function () {
